@@ -1,1 +1,1 @@
-import '../../apis/fetchAPIs';
+import '../../apis';

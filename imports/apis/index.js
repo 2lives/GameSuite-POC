@@ -1,0 +1,1 @@
+import { Champions } from './riotAPI';

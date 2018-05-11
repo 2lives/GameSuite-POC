@@ -10,7 +10,7 @@ const leagueChampionDataURL =
 request(leagueChampionDataURL, function(error, response, body) {
     if (!error && response.statusCode == 200) {
         const leagueChampionData = JSON.parse(body);
-        res.send(leagueChampionData);
+        response.send(leagueChampionData);
 
         const MongoClient = require('mongodb').MongoClient;
         const url = 'mongodb://localhost:27017/mondb';

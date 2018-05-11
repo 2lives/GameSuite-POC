@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 
-import { Champions } from '../imports/apis/fetchAPIs';
+import { Champions } from '../imports/apis';
 
 class userProfile extends Component {}
 
