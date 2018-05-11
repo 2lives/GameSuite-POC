@@ -1,1 +1,1 @@
-import RegisterApi from './register-api';
+import RegisterApi from './registerAPIs';

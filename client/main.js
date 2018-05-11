@@ -7,13 +7,6 @@ import { Champions } from '../imports/apis/fetchAPIs';
 
 class userProfile extends Component {}
 
-const userProfileContainer = withTracker(() => {
-    Meteor.subscribe('champions');
-    return {
-        champions: Champions.find({}).fetch()
-    };
-})(userProfile);
-
 Meteor.startup(
-    ReactDOM.render(<userProfileContainer />, document.getElementById('root'))
+    ReactDOM.render(<userProfile />, document.getElementById('root'))
 );
