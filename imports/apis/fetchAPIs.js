@@ -20,9 +20,7 @@ request(leagueChampionDataURL, function(error, response, body) {
             const myobj = data;
             db.collection('champions').insert(myobj, function(err, res) {
                 if (err) throw err;
-                console.log(
-                    'Number of documents inserted: ' + res.insertedCount
-                );
+                console.log('Docs inserted: ' + res.insertedCount);
                 db.close();
             });
         });
