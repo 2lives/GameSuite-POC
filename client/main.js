@@ -8,14 +8,18 @@ import { Fortnite } from '../imports/apis';
 
 class userProfiles extends Component {
     getProfile(user) {
-        Meteor.call('fortnite.getProfile', calvintyvm);
+        Meteor.call('fortnite.getProfile');
+    }
+    getStaticData() {
+        Meteor.call('champions.getStaticData');
     }
 }
 
 const userProfilesContainer = withTracker(() => {
-    Meteor.subscribe('fortnite');
+    Meteor.subscribe('fortnite', 'champions');
     return {
-        fortnite: Fortnite.find({}).fetch()
+        fortnite: Fortnite.find({}).fetch(),
+        champions: Fortnite.find({}).fetch()
     };
 })(userProfiles);
 
