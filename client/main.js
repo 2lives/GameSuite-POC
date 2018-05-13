@@ -15,6 +15,7 @@ class userProfiles extends Component {
     }
 }
 
+
 const userProfilesContainer = withTracker(() => {
     Meteor.subscribe('fortnite', 'champions');
     return {
