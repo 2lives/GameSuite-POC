@@ -1,4 +1,14 @@
 import { Champions } from '../../apis';
 import { Meteor } from 'meteor/meteor';
 
-Meteor.startup(() => {});
+Meteor.startup(() => {
+    ServiceConfiguration.configurations.upsert(
+      { service: 'steam' },
+      {
+        $set: {
+          loginStyle: 'redirect',
+          timeout: 10000
+        }
+      }
+    );
+  });

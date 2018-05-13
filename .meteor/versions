@@ -67,6 +67,8 @@ reactive-var@1.0.11
 reload@1.2.0
 retry@1.1.0
 routepolicy@1.0.13
+scholtzm:accounts-steam@1.2.0
+scholtzm:steam@1.2.0
 server-render@0.3.0
 service-configuration@1.0.11
 shell-server@0.3.1
