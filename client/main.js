@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 import { Champions } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
-import AccountStepper from '../imports/ui/SelectAccUI';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import GameGridList from '../imports/ui/SelectAccUI';
 
 class userProfiles extends Component {
     getProfile(user) {
@@ -26,5 +27,9 @@ class userProfiles extends Component {
 // })(userProfiles);
 
 Meteor.startup(
-    ReactDOM.render(<AccountStepper />, document.getElementById('root'))
+    ReactDOM.render(
+    <MuiThemeProvider>
+        <GameGridList />
+    </MuiThemeProvider>
+    , document.getElementById('root'))
 );
