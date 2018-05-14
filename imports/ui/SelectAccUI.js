@@ -1,96 +1,67 @@
 import React from 'react';
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
-class AccountStepper extends React.Component {
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-  state = {
-    finished: false,
-    stepIndex: 0,
-  };
+// import LeagueLogo from '../../assets/images/league-logo.png'
 
-  handleNext = () => {
-    const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
-  };
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+    overflowY: 'auto',
+  },
+};
 
-  handlePrev = () => {
-    const {stepIndex} = this.state;
-    if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
-    }
-  };
+const tilesData = [
+  {
+    img: 'http://via.placeholder.com/350x150',
+    title: 'League of Legends',
+    author: 'Riot Games',
+  },
+  {
+    img: 'http://via.placeholder.com/350x150',
+    title: 'CS:GO',
+    author: 'Valve',
+  },
+  {
+    img: 'http://via.placeholder.com/350x150',
+    title: 'Fortnite',
+    author: 'Epic Games',
+  },
+];
 
-  renderStepActions(step) {
-    const {stepIndex} = this.state;
+/**
+ * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
+ */
+const GameGridList = () => (
+  <div style={styles.root}>
 
-    return (
-      <div style={{margin: '12px 0'}}>
-        <RaisedButton
-          label={stepIndex === 2 ? 'Finish' : 'Next'}
-          disableTouchRipple={true}
-          disableFocusRipple={true}
-          primary={true}
-          onClick={this.handleNext}
-          style={{marginRight: 12}}
-        />
-        {step > 0 && (
-          <FlatButton
-            label="Back"
-            disabled={stepIndex === 0}
-            disableTouchRipple={true}
-            disableFocusRipple={true}
-            onClick={this.handlePrev}
-          />
-        )}
-      </div>
-    );
-  }
+    <GridList
+      cellHeight={180}
+      style={styles.gridList}
+    >
+      {tilesData.map((tile) => (
+        <GridTile
+          key={tile.img}
+          title={tile.title}
+          subtitle={<span>by <b>{tile.author}</b></span>}
+          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+        >
+          <img src={tile.img} />
+        </GridTile>
+      ))}
+    </GridList>
 
-  render() {
-    const {finished, stepIndex} = this.state;
+  </div>
+);
 
-    return (
-      <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
-        <Stepper activeStep={stepIndex} orientation="vertical">
-          <Step>
-            <StepLabel>League of Legends</StepLabel>
-            <StepContent>
-              <p>
-                  I am the league of legends stepper
-              </p>
-              {this.renderStepActions(0)}
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Steam</StepLabel>
-            <StepContent>
-              <p> I am the steam stepper</p>
-              {this.renderStepActions(1)}
-            </StepContent>
-          </Step>
-          <Step>
-            <StepLabel>Fortnite</StepLabel>
-            <StepContent>
-              <p>
-                Fortnite stepper
-              </p>
-              {this.renderStepActions(2)}
-            </StepContent>
-          </Step>
-        </Stepper>
-      </div>
-    );
-  }
-}
-
-export default AccountStepper;
+export default GameGridList;
