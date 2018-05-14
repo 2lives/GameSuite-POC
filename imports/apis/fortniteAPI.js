@@ -36,7 +36,7 @@ HTTP.call(
     (error, result) => {
         if (!error) {
             console.log(result);
-            Fortnite.insert(result);
+            Fortnite.update(result, { upsert: true });
         }
     }
 );
