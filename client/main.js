@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
-
+import Routes from '../routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Champions } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
 import AccountStepper from '../imports/ui/SelectAccUI';
+import { MuiThemeProvider } from 'material-ui/styles';
+import muiTheme from '../config/themes';
 
 class userProfiles extends Component {
     getProfile(user) {
@@ -25,6 +28,14 @@ class userProfiles extends Component {
 //     };
 // })(userProfiles);
 
-Meteor.startup(
-    ReactDOM.render(<AccountStepper />, document.getElementById('root'))
+const GameSuite = () => (
+    <MuiThemeProvider muiTheme={muiTheme}>
+        <Router>
+            <Routes />
+        </Router>
+    </MuiThemeProvider>
 );
+
+Meteor.startup(() => {
+    ReactDOM.render(<GameSuite />, document.getElementById('root'));
+});
