@@ -35,8 +35,11 @@ HTTP.call(
     },
     (error, result) => {
         if (!error) {
-            console.log(result);
-            Fortnite.update(result, { upsert: true });
+            Fortnite.update(
+                { user: 'calvintyvm' },
+                { $set: { profile: result.content } },
+                { upsert: true }
+            );
         }
     }
 );

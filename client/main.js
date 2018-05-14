@@ -15,14 +15,13 @@ class userProfiles extends Component {
     }
 }
 
-
-const userProfilesContainer = withTracker(() => {
-    Meteor.subscribe('fortnite', 'champions');
-    return {
-        fortnite: Fortnite.find({}).fetch(),
-        champions: Fortnite.find({}).fetch()
-    };
-})(userProfiles);
+// const userProfilesContainer = withTracker(() => {
+//     Meteor.subscribe('fortnite', 'champions');
+//     return {
+//         fortnite: Fortnite.find({}).fetch(),
+//         champions: Fortnite.find({}).fetch()
+//     };
+// })(userProfiles);
 
 Meteor.startup(
     ReactDOM.render(<userProfilesContainer />, document.getElementById('root'))

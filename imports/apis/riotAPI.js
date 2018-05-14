@@ -12,12 +12,16 @@ const Champions = new Mongo.Collection('champions');
 
 HTTP.call(
     'GET',
-    'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=RGAPI-83b8099b-f0ba-4958-81d1-91e0d7d7456c',
+    'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=RGAPI-66ce1e6e-fb4c-4e20-b5b9-da88dbe8b2db',
     {},
     (error, result) => {
         if (!error) {
             console.log(result);
-            Champions.insert(result);
+            Champions.update(
+                { user: 'static' },
+                { $set: { leagueChampions: result.content } },
+                { upsert: true }
+            );
         }
     }
 );
