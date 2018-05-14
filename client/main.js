@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import { Champions } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
+import AccountStepper from '../imports/ui/SelectAccUI';
+
 class userProfiles extends Component {
     getProfile(user) {
         Meteor.call('fortnite.getProfile');
@@ -15,15 +17,15 @@ class userProfiles extends Component {
     }
 }
 
+// const UserProfilesContainer = withTracker(() => {
+//     Meteor.subscribe('fortnite', 'champions');
+//     return {
+//         fortnite: Fortnite.find({}).fetch(),
+//         champions: Fortnite.find({}).fetch()
+//     };
+// })(userProfiles);
 
-const userProfilesContainer = withTracker(() => {
-    Meteor.subscribe('fortnite', 'champions');
-    return {
-        fortnite: Fortnite.find({}).fetch(),
-        champions: Fortnite.find({}).fetch()
-    };
-})(userProfiles);
 
 Meteor.startup(
-    ReactDOM.render(<userProfilesContainer />, document.getElementById('root'))
+    ReactDOM.render(<AccountStepper />, document.getElementById('root'))
 );
