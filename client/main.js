@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import Routes from '../routes';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Champions } from '../imports/apis';
+import { League } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
 import AccountStepper from '../imports/ui/SelectAccUI';
@@ -21,7 +21,7 @@ class GameSuiteContainer extends Component {
     //     }
 
     render() {
-        console.log(this.props.fortnite);
+        //    console.log(this.props.fortnite);
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <Router>
@@ -33,10 +33,10 @@ class GameSuiteContainer extends Component {
 }
 
 const GameSuite = withTracker(() => {
-    Meteor.subscribe('fortnite', 'champions');
+    Meteor.subscribe('fortnite', 'league');
     return {
         fortnite: Fortnite.find().fetch(),
-        champions: Champions.find().fetch()
+        league: League.find().fetch()
     };
 })(GameSuiteContainer);
 

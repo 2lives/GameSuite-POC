@@ -2,7 +2,7 @@ import React from 'react';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
-const Champions = new Mongo.Collection('champions');
+const League = new Mongo.Collection('league');
 
 //  Meteor.methods({
 //     'champions.getStaticData'(user) {
@@ -12,12 +12,12 @@ const Champions = new Mongo.Collection('champions');
 
 HTTP.call(
     'GET',
-    'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=RGAPI-66ce1e6e-fb4c-4e20-b5b9-da88dbe8b2db',
+    'https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=RGAPI-018c7371-8e87-491c-b46f-869b4245514d',
     {},
     (error, result) => {
         if (!error) {
-            console.log(result);
-            Champions.update(
+            //   console.log(result);
+            League.update(
                 { user: 'static' },
                 { $set: { leagueChampions: result.content } },
                 { upsert: true }
@@ -29,9 +29,9 @@ HTTP.call(
 //async await
 
 if (Meteor.isServer) {
-    Meteor.publish('champions', function() {
-        return Champions.find();
+    Meteor.publish('league', function() {
+        return League.find();
     });
 }
 
-export default Champions;
+export default League;
