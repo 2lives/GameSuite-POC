@@ -7,10 +7,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { League } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
-import AccountStepper from '../imports/ui/SelectAccUI';
 import muiTheme from '../config/themes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import GameGridList from '../imports/ui/SelectAccUI';
+import GameGridList from '../imports/ui/containers/SelectAccUI';
 
 class GameSuiteContainer extends Component {
     //     getProfile(user) {
