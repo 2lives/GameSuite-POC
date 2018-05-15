@@ -7,39 +7,38 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Champions } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
-import AccountStepper from '../imports/ui/SelectAccUI';
 import muiTheme from '../config/themes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import GameGridList from '../imports/ui/SelectAccUI';
+import GameGridList from '../imports/ui/containers/SelectAccUI';
 
 class GameSuiteContainer extends Component {
-    //     getProfile(user) {
-    //         Meteor.call('fortnite.getProfile');
-    //     }
-    //     getStaticData() {
-    //         Meteor.call('champions.getStaticData');
-    //     }
+  //     getProfile(user) {
+  //         Meteor.call('fortnite.getProfile');
+  //     }
+  //     getStaticData() {
+  //         Meteor.call('champions.getStaticData');
+  //     }
 
-    render() {
-        console.log(this.props.fortnite);
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <Router>
-                    <Routes />
-                </Router>
-            </MuiThemeProvider>
-        );
-    }
+  render() {
+    console.log(this.props.fortnite);
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Router>
+          <Routes />
+        </Router>
+      </MuiThemeProvider>
+    );
+  }
 }
 
 const GameSuite = withTracker(() => {
-    Meteor.subscribe('fortnite', 'champions');
-    return {
-        fortnite: Fortnite.find().fetch(),
-        champions: Champions.find().fetch()
-    };
+  Meteor.subscribe('fortnite', 'champions');
+  return {
+    fortnite: Fortnite.find().fetch(),
+    champions: Champions.find().fetch()
+  };
 })(GameSuiteContainer);
 
 Meteor.startup(() => {
-    ReactDOM.render(<GameSuite />, document.getElementById('root'));
+  ReactDOM.render(<GameSuite />, document.getElementById('root'));
 });

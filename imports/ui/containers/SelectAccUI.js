@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 
+import SteamLogin from '../components/SteamLogin';
+
 const styles = {
   root: {
     display: 'flex',
@@ -34,10 +36,7 @@ const GameGridList = () => (
 
       <GridTile key="CS:GO">
         <img src="https://steamcdn-a.akamaihd.net/steam/subs/54029/header_586x192.jpg?t=1505435721" />
-
-        <IconButton id="steamLogin">
-          <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" />
-        </IconButton>
+        <SteamLogin />
       </GridTile>
 
       <GridTile key="FortniteBR">
