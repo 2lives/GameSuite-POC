@@ -24,7 +24,6 @@ HTTP.call(
             );
         }
     }
-  }
 );
 
 //async await
