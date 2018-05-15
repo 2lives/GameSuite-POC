@@ -8,8 +8,8 @@ import { Champions } from '../imports/apis';
 import { Fortnite } from '../imports/apis';
 
 import AccountStepper from '../imports/ui/SelectAccUI';
-import { MuiThemeProvider } from 'material-ui/styles';
 import muiTheme from '../config/themes';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import GameGridList from '../imports/ui/SelectAccUI';
 
 class GameSuiteContainer extends Component {

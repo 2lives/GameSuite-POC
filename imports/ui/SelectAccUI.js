@@ -1,66 +1,56 @@
 import React from 'react';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
-// import LeagueLogo from '../../assets/images/league-logo.png'
+import TextField from 'material-ui/TextField';
 
 const styles = {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+    backgroundColor: 'grey'
   },
   gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
+    width: 700,
+    height: 600,
+    overflowY: 'auto'
   },
+  steamBtn: {
+    width: '80%'
+  }
 };
 
-const tilesData = [
-  {
-    img: 'http://via.placeholder.com/350x150',
-    title: 'League of Legends',
-    author: 'Riot Games',
-  },
-  {
-    img: 'http://via.placeholder.com/350x150',
-    title: 'CS:GO',
-    author: 'Valve',
-  },
-  {
-    img: 'http://via.placeholder.com/350x150',
-    title: 'Fortnite',
-    author: 'Epic Games',
-  },
-];
-
-/**
- * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
- */
 const GameGridList = () => (
   <div style={styles.root}>
+    <GridList cellHeight="auto" style={styles.gridList}>
+      <GridTile key="League">
+        <img style={{ width: '100%' }} src="/assets/images/league-logo.png" />
+        <TextField
+          hintText="Input your summoner name here!"
+          floatingLabelText="Summoner Name"
+        />
+      </GridTile>
 
-    <GridList
-      cellHeight={180}
-      style={styles.gridList}
-    >
-      {tilesData.map((tile) => (
-        <GridTile
-          key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.author}</b></span>}
-          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-        >
-          <img src={tile.img} />
-        </GridTile>
-      ))}
+      <GridTile key="CS:GO">
+        <img src="https://steamcdn-a.akamaihd.net/steam/subs/54029/header_586x192.jpg?t=1505435721" />
+
+        <IconButton id="steamLogin">
+          <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" />
+        </IconButton>
+      </GridTile>
+
+      <GridTile key="FortniteBR">
+        <img
+          style={{ width: '100%' }}
+          src="https://res.cloudinary.com/lmn/image/upload/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinnyc/m/a/x/maxresdefault-7aaa5.jpg"
+        />
+        <TextField
+          hintText="Input your Epic Games ID here!"
+          floatingLabelText="Epic Games ID"
+        />
+      </GridTile>
     </GridList>
-
   </div>
 );
 
