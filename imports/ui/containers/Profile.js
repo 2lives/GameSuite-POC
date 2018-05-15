@@ -14,12 +14,16 @@ import { Fortnite } from '../../apis';
 import { withTracker } from 'meteor/react-meteor-data';
 
 // const fortnite = Meteor.fortnite.find().fetch();
+// console.log(this.props);
 class ProfileContainer extends Component {
     render() {
         console.log(this.props);
+
         if (!this.props.fortnite || !this.props.fortnite.length) {
             return <p>loading</p>;
         } else {
+            let fortniteProfile = JSON.parse(this.props.fortnite[0].profile);
+            console.log(fortniteProfile.accountId);
             return (
                 <div>
                     <Card>
@@ -30,7 +34,7 @@ class ProfileContainer extends Component {
                         />
                         <CardTitle title="Fortnite" subtitle="Epic Games" />
                         <CardText>
-                            Win Ratio %//JSON.parse
+                            Win Ratio %:
                             {this.props.fortnite[0].profile.accountId}
                         </CardText>
                     </Card>
