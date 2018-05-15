@@ -1,3 +1,4 @@
-import { Champions } from './riotAPI';
-import { SteamId } from './steamAPI';
-import { Fortnite } from './fortniteAPI';
+import Champions from './riotAPI';
+import SteamId from './steamAPI';
+import Fortnite from './fortniteAPI';
+export { Champions, Fortnite, SteamId };

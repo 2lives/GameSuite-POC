@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 
-const Fortnite = new Mongo.Collection('fornite');
+const Fortnite = new Mongo.Collection('fortnite');
 
 // Meteor.methods({
 //     //user
@@ -45,7 +45,7 @@ HTTP.call(
 );
 
 //async await
-
+// console.log(Fortnite.find().fetch());
 if (Meteor.isServer) {
     Meteor.publish('fortnite', function() {
         return Fortnite.find();
