@@ -6,14 +6,13 @@ const placeHolderId = '76561198041950916';
 
 HTTP.call(
   'GET',
-  'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=08A68F74EB79852D80BF6CE55B8DBD5A&steamids=76561198041950916',
+  `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=08A68F74EB79852D80BF6CE55B8DBD5A&steamids=${placeHolderId}`,
   {},
   (error, result) => {
     if (!error) {
-      JSON.parse(result) = this
       SteamId.update(
-        { user: {resut} },
-        { $set: { steamIdNum: result.content } },
+        { user: 'static' },
+        { $set: { steamUserData: result.content } },
         { upsert: true }
       );
     }
