@@ -28,14 +28,14 @@ class ProfileContainer extends Component {
                 <div>
                     <Card>
                         <CardHeader
-                            title={this.props.fortnite[0].user}
-                            subtitle="calvin" //{this.props.fortnite[0].profile}
+                            title="Calvin" //GameSuite username
+                            subtitle={fortniteProfile.epicUserHandle}
                             avatar="https://res.cloudinary.com/teepublic/image/private/s--8LWtGSfC--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1522032181/production/designs/2529444_0.jpg"
                         />
                         <CardTitle title="Fortnite" subtitle="Epic Games" />
                         <CardText>
                             Win Ratio %:
-                            {this.props.fortnite[0].profile.accountId}
+                            {/* {fortniteProfile.winRatio.value} */}
                         </CardText>
                     </Card>
                     {/* split */}
