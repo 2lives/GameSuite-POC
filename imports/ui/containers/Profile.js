@@ -28,6 +28,9 @@ const styles = {
     },
     title: {
         fontWeight: '500'
+    },
+    username: {
+        marginLeft: '15px'
     }
 };
 
@@ -52,6 +55,7 @@ class ProfileContainer extends Component {
                                     avatar="https://res.cloudinary.com/teepublic/image/private/s--8LWtGSfC--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1522032181/production/designs/2529444_0.jpg"
                                     style={styles.cardHeader}
                                 />
+                                <span style={styles.username}>Username:</span>
                                 <CardTitle
                                     title={fortniteProfile.epicUserHandle}
                                     style={styles.title}
@@ -62,12 +66,17 @@ class ProfileContainer extends Component {
                                 Win Ratio %:{'\n'}
                                 {fortniteProfile.stats.p2.winRatio.value}
                                 {'\n'}
-                                {/* suh dude, asuh my guy */}
                                 Total Kills:{'\n'}
                                 {fortniteProfile.stats.p2.kills.value}
                                 {'\n'}
                                 Kill/ Death Ratio: {'\n'}
                                 {fortniteProfile.stats.p2.kd.value}
+                                {'\n'}
+                                Score per Match: {'\n'}
+                                {fortniteProfile.stats.p2.scorePerMatch.value}
+                                {'\n'}
+                                Matches Played in Current Season: {'\n'}
+                                {fortniteProfile.stats.p2.matches.value}
                             </CardText>
                         </div>
                     </Card>
@@ -81,6 +90,7 @@ class ProfileContainer extends Component {
                                     avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
                                     style={styles.cardHeader}
                                 />
+                                <span style={styles.username}>Username:</span>
                                 <CardTitle
                                     title={this.props.fortnite[0].user}
                                     style={styles.title}
