@@ -31,19 +31,23 @@ HTTP.call(
 const getSummonerId =
     'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/calvintyvm?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe';
 
+const summonerInfo = summonerId =>
+    'https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/' +
+    summonerId +
+    '?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe';
+
 const summonerId = fetch(getSummonerId)
     .then(response => response.json())
-    .then(result => result.id);
+    .then(result => result.id)
+    .then(resp => summonerInfo(resp))
+    .then(result => console.log(result));
 
-const summonerInfo = summonerId => {
-    'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' +
-        summonerId +
-        '?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe';
-};
+const summonerName = fetch(getSummonerId)
+    .then(response => response.json())
+    .then(result => result.name)
+    .then(resp => console.log(resp));
 
-console.log(summonerInfo('DaiBey'));
-
-//     HTTP.call(
+//    /    /     HTTP.call(
 //         'GET',
 //         'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/calvintyvm?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe',
 //         {},
