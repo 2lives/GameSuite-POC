@@ -11,34 +11,42 @@ import muiTheme from '../config/themes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import GameGridList from '../imports/ui/containers/SelectAccUI';
 
-class GameSuiteContainer extends Component {
-    //     getProfile(user) {
-    //         Meteor.call('fortnite.getProfile');
-    //     }
-    //     getStaticData() {
-    //         Meteor.call('champions.getStaticData');
-    //     }
+import AccountsUIWrapper from '../imports/ui/components/AccountsWrapper';
 
-    render() {
-        //    console.log(this.props.fortnite);
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <Router>
-                    <Routes />
-                </Router>
-            </MuiThemeProvider>
-        );
-    }
+class GameSuiteContainer extends Component {
+  //     getProfile(user) {
+  //         Meteor.call('fortnite.getProfile');
+  //     }
+  //     getStaticData() {
+  //         Meteor.call('champions.getStaticData');
+  //     }
+
+  render() {
+    //    console.log(this.props.fortnite);
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <div className="login-wrapper">
+            <AccountsUIWrapper />
+          </div>
+
+          <Router>
+            <Routes />
+          </Router>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
 }
 
 const GameSuite = withTracker(() => {
-    Meteor.subscribe('fortnite', 'league');
-    return {
-        fortnite: Fortnite.find().fetch(),
-        league: League.find().fetch()
-    };
+  Meteor.subscribe('fortnite', 'league');
+  return {
+    fortnite: Fortnite.find().fetch(),
+    league: League.find().fetch()
+  };
 })(GameSuiteContainer);
 
 Meteor.startup(() => {
-    ReactDOM.render(<GameSuite />, document.getElementById('root'));
+  ReactDOM.render(<GameSuite />, document.getElementById('root'));
 });
