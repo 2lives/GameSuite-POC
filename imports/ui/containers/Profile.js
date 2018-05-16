@@ -13,6 +13,24 @@ import { League } from '../../apis';
 import { Fortnite } from '../../apis';
 import { withTracker } from 'meteor/react-meteor-data';
 
+const styles = {
+    marginBottom: '25px',
+    width: '75vw',
+    cardWrapper: {
+        display: 'flex',
+        height: '200px'
+    },
+    cardHeader: {
+        fontWeight: '300'
+    },
+    cardText: {
+        whiteSpace: 'pre-line'
+    },
+    title: {
+        fontWeight: '500'
+    }
+};
+
 // const fortnite = Meteor.fortnite.find().fetch();
 // console.log(this.props);
 class ProfileContainer extends Component {
@@ -23,33 +41,56 @@ class ProfileContainer extends Component {
             return <p>loading</p>;
         } else {
             let fortniteProfile = JSON.parse(this.props.fortnite[0].profile);
-            console.log(fortniteProfile.accountId);
             return (
                 <div>
-                    <Card>
-                        <CardHeader
-                            title={fortniteProfile.epicUserHandle} //GameSuite username
-                            //    subtitle=
-                            avatar="https://res.cloudinary.com/teepublic/image/private/s--8LWtGSfC--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1522032181/production/designs/2529444_0.jpg"
-                        />
-                        <CardTitle title="Fortnite" subtitle="Epic Games" />
-                        <CardText>
-                            Win Ratio %:{' '}
-                            {fortniteProfile.stats.p2.winRatio.value}
-                        </CardText>
+                    <Card style={styles}>
+                        <div style={styles.cardWrapper}>
+                            <div style={styles.cardHeader}>
+                                <CardHeader
+                                    title="Fortnite"
+                                    subtitle="Epic Games"
+                                    avatar="https://res.cloudinary.com/teepublic/image/private/s--8LWtGSfC--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1522032181/production/designs/2529444_0.jpg"
+                                    style={styles.cardHeader}
+                                />
+                                <CardTitle
+                                    title={fortniteProfile.epicUserHandle}
+                                    style={styles.title}
+                                />
+                            </div>
+
+                            <CardText style={styles.cardText}>
+                                Win Ratio %:{'\n'}
+                                {fortniteProfile.stats.p2.winRatio.value}
+                                {'\n'}
+                                {/* suh dude, asuh my guy */}
+                                Total Kills:{'\n'}
+                                {fortniteProfile.stats.p2.kills.value}
+                                {'\n'}
+                                Kill/ Death Ratio: {'\n'}
+                                {fortniteProfile.stats.p2.kd.value}
+                            </CardText>
+                        </div>
                     </Card>
                     {/* split */}
-                    <Card>
-                        <CardHeader
-                            title={this.props.fortnite[0].user}
-                            subtitle="calvin" //{this.props.fortnite[0].profile}
-                            avatar="https://media.lolusercontent.com/api/embedly/1/image/resize?url=http%3A%2F%2Fi.imgur.com%2FxNLs83T.png&key=a45e967db0914c7fb472fd4381e6c85b&width=425"
-                        />
-                        <CardTitle
-                            title="League of Legends"
-                            subtitle="Riot Games"
-                        />
-                        <CardText>Calvin is bad at League of Legends</CardText>
+                    <Card style={styles}>
+                        <div style={styles.cardWrapper}>
+                            <div style={styles.cardHeader}>
+                                <CardHeader
+                                    title="League of Legends"
+                                    subtitle="Riot Games"
+                                    avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
+                                    style={styles.cardHeader}
+                                />
+                                <CardTitle
+                                    title={this.props.fortnite[0].user}
+                                    style={styles.title}
+                                />
+                            </div>
+
+                            <CardText style={styles.cardText}>
+                                Calvin is bad at League of Legends
+                            </CardText>
+                        </div>
                     </Card>
                 </div>
             );
