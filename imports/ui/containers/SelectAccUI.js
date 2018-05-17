@@ -51,14 +51,14 @@ const GameGridList = () => (
         />
       </GridTile>
 
-      <GridTile key="StarCraft II">
+      {/* <GridTile key="StarCraft II">
         <img
           style={{ width: '100%' }}
           src="/assets/images/StarCraftII_Logo.jpg"
-        />
+        /> */}
 
-        <FlatButton>Click Me!</FlatButton>
-      </GridTile>
+      {/* <FlatButton>Click Me!</FlatButton> */}
+      {/* </GridTile> */}
     </GridList>
   </div>
 );
