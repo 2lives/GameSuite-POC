@@ -10,43 +10,45 @@ import { Fortnite } from '../imports/apis';
 import muiTheme from '../config/themes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import GameGridList from '../imports/ui/containers/SelectAccUI';
-
+import HeaderBar from '../imports/ui/components/HeaderBar';
 import AccountsUIWrapper from '../imports/ui/components/AccountsWrapper';
+import Layout from '../imports/ui/components/Layout';
 
 class GameSuiteContainer extends Component {
-  //     getProfile(user) {
-  //         Meteor.call('fortnite.getProfile');
-  //     }
-  //     getStaticData() {
-  //         Meteor.call('champions.getStaticData');
-  //     }
+    //     getProfile(user) {
+    //         Meteor.call('fortnite.getProfile');
+    //     }
+    //     getStaticData() {
+    //         Meteor.call('champions.getStaticData');
+    //     }
 
-  render() {
-    //    console.log(this.props.fortnite);
-    return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <div className="login-wrapper">
-            <AccountsUIWrapper />
-          </div>
-
-          <Router>
-            <Routes />
-          </Router>
-        </div>
-      </MuiThemeProvider>
-    );
-  }
+    render() {
+        //    console.log(this.props.fortnite);
+        return (
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div>
+                    <div className="login-wrapper">
+                        <AccountsUIWrapper />
+                    </div>
+                    <Router>
+                        <Layout>
+                            <Routes />
+                        </Layout>
+                    </Router>
+                </div>
+            </MuiThemeProvider>
+        );
+    }
 }
 
 const GameSuite = withTracker(() => {
-  Meteor.subscribe('fortnite', 'league');
-  return {
-    fortnite: Fortnite.find().fetch(),
-    league: League.find().fetch()
-  };
+    Meteor.subscribe('fortnite', 'league');
+    return {
+        fortnite: Fortnite.find().fetch(),
+        league: League.find().fetch()
+    };
 })(GameSuiteContainer);
 
 Meteor.startup(() => {
-  ReactDOM.render(<GameSuite />, document.getElementById('root'));
+    ReactDOM.render(<GameSuite />, document.getElementById('root'));
 });

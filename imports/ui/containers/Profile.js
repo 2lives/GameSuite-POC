@@ -39,7 +39,6 @@ class ProfileContainer extends Component {
             <p>league is loading</p>;
         } else {
             //   console.log(this.props.league[0].SummonerMasteryInfo.championId);
-            console.log(mostPlayedChampion);
         }
         if (!this.props.fortnite || !this.props.fortnite.length) {
             return <p>loading</p>;
