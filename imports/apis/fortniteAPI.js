@@ -11,7 +11,7 @@ const Fortnite = new Mongo.Collection('fortnite');
 
 HTTP.call(
     'GET',
-    'https://api.fortnitetracker.com/v1/profile/pc/calvintyvm',
+    `https://api.fortnitetracker.com/v1/profile/pc/${user}`,
     {
         headers: {
             'TRN-Api-Key': 'e5c756b6-f460-45e3-9653-d878c0a535dc'
@@ -20,8 +20,8 @@ HTTP.call(
     (error, result) => {
         if (!error) {
             Fortnite.update(
-                { user: 'calvintyvm' },
-                { $set: { profile: result.content } },
+                { _id: user },
+                { $set: { 'services.fortnite': result.content } },
                 { upsert: true }
             );
         }
