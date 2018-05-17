@@ -38,7 +38,7 @@ const styles = {
 // console.log(this.props);
 class ProfileContainer extends Component {
     render() {
-        console.log(this.props);
+        console.log(this.props.league);
 
         if (!this.props.fortnite || !this.props.fortnite.length) {
             return <p>loading</p>;
