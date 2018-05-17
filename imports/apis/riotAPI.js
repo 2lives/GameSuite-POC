@@ -27,13 +27,14 @@ HTTP.call(
         }
     }
 );
-const getSummonerId =
-    'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/calvintyvm?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe';
+
+const apiKey = 'RGAPI-ea8583a6-73a4-466c-925e-704de8e1abb1';
+const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/calvintyvm?api_key=${apiKey}`;
 
 const summonerInfo = summonerId =>
-    'https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/' +
+    `https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/` +
     summonerId +
-    '?api_key=RGAPI-07be9afe-b5f6-4a6b-8506-0debf1dc09fe';
+    `?api_key=${apiKey}`;
 
 const summonerId = fetch(getSummonerId)
     .then(response => response.json())
@@ -48,9 +49,6 @@ const summonerId = fetch(getSummonerId)
             { upsert: true }
         )
     );
-
-// console.log(league.find(championId));
-//     const mostPlayed = LeagueChampionsStaticList.find()
 
 const summonerName = fetch(getSummonerId)
     .then(response => response.json())
