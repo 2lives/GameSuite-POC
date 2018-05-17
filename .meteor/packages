@@ -24,6 +24,5 @@ scholtzm:accounts-steam
 http
 static-html
 service-configuration
-brettle:accounts-multiple
 accounts-ui-unstyled
 accounts-password

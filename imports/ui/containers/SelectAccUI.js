@@ -3,6 +3,7 @@ import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 
 import SteamLogin from '../components/SteamLogin';
 
@@ -48,6 +49,15 @@ const GameGridList = () => (
           hintText="Input your Epic Games ID here!"
           floatingLabelText="Epic Games ID"
         />
+      </GridTile>
+
+      <GridTile key="StarCraft II">
+        <img
+          style={{ width: '100%' }}
+          src="/assets/images/StarCraftII_Logo.jpg"
+        />
+
+        <FlatButton>Click Me!</FlatButton>
       </GridTile>
     </GridList>
   </div>

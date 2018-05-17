@@ -8,11 +8,21 @@ Meteor.startup(() => {
     { service: 'steam' },
     {
       $set: {
-        loginStyle: 'redirect',
+        loginStyle: 'popup',
         timeout: 10000
       }
     }
   );
+  // ServiceConfiguration.configurations.upsert(
+  //   { service: 'battlenet' },
+  //   {
+  //     $set: {
+  //       clientId: '8gxaf95jd99wm2xgt9hdkrxqpwm95fex',
+  //       scope: 'sc2.profile',
+  //       secret: 'W4EAyCKRRhjJKdMjpfX6kASydrYtdkaG'
+  //     }
+  //   }
+  // );
 });
 
 Accounts.validateNewUser(user => {
