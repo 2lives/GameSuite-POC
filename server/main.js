@@ -13,16 +13,16 @@ Meteor.startup(() => {
       }
     }
   );
-  // ServiceConfiguration.configurations.upsert(
-  //   { service: 'battlenet' },
-  //   {
-  //     $set: {
-  //       clientId: '8gxaf95jd99wm2xgt9hdkrxqpwm95fex',
-  //       scope: 'sc2.profile',
-  //       secret: 'W4EAyCKRRhjJKdMjpfX6kASydrYtdkaG'
-  //     }
-  //   }
-  // );
+  ServiceConfiguration.configurations.upsert(
+    { service: 'battlenet' },
+    {
+      $set: {
+        clientId: '8gxaf95jd99wm2xgt9hdkrxqpwm95fex',
+        scope: 'sc2.profile',
+        secret: 'W4EAyCKRRhjJKdMjpfX6kASydrYtdkaG'
+      }
+    }
+  );
 });
 
 Accounts.validateNewUser(user => {

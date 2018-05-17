@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
-    "bcrypt": "^2.0.1",
     "blaze": "^4.0.0-7",
     "fetch": "^1.1.0",
     "material-ui": "^0.20.1",
