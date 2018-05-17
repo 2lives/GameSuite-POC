@@ -33,13 +33,14 @@ const styles = {
         marginLeft: '15px'
     }
 };
-
-// const fortnite = Meteor.fortnite.find().fetch();
-// console.log(this.props);
 class ProfileContainer extends Component {
     render() {
-        console.log(this.props.league);
-
+        if (!this.props.league.length || !this.props.league) {
+            <p>league is loading</p>;
+        } else {
+            //   console.log(this.props.league[0].SummonerMasteryInfo.championId);
+            console.log(mostPlayedChampion);
+        }
         if (!this.props.fortnite || !this.props.fortnite.length) {
             return <p>loading</p>;
         } else {
