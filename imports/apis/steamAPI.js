@@ -19,7 +19,7 @@ import { Meteor } from 'meteor/meteor';
 //     }
 // );
 if (Meteor.isServer) {
-  Meteor.publish('steamId', function championsPublication() {
+  Meteor.publish('steamId', function() {
     return SteamId;
   });
 }

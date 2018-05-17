@@ -13,8 +13,6 @@ binary-heap@1.0.10
 blaze@2.3.2
 blaze-tools@1.0.10
 boilerplate-generator@1.4.0
-brettle:accounts-multiple@0.3.1
-brettle:workaround-issue-4862@0.0.3
 caching-compiler@1.1.11
 caching-html-compiler@1.1.2
 callback-hook@1.1.0
