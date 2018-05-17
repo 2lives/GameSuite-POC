@@ -5,6 +5,9 @@ import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+import LeagueLogin from '../components/LeagueLogin';
+import FortniteLogin from '../components/FortniteLogin';
+
 import SteamLogin from '../components/SteamLogin';
 
 const styles = {
@@ -29,10 +32,7 @@ const GameGridList = () => (
     <GridList cellHeight="auto" style={styles.gridList}>
       <GridTile key="League">
         <img style={{ width: '100%' }} src="/assets/images/league-logo.png" />
-        <TextField
-          hintText="Input your summoner name here!"
-          floatingLabelText="Summoner Name"
-        />
+        <LeagueLogin />
       </GridTile>
 
       <GridTile key="CS:GO">
@@ -45,10 +45,7 @@ const GameGridList = () => (
           style={{ width: '100%' }}
           src="https://res.cloudinary.com/lmn/image/upload/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinnyc/m/a/x/maxresdefault-7aaa5.jpg"
         />
-        <TextField
-          hintText="Input your Epic Games ID here!"
-          floatingLabelText="Epic Games ID"
-        />
+        <FortniteLogin />
       </GridTile>
 
       {/* <GridTile key="StarCraft II">
