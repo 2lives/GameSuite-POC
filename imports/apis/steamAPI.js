@@ -19,9 +19,15 @@ import { Meteor } from 'meteor/meteor';
 //     }
 // );
 if (Meteor.isServer) {
+<<<<<<< HEAD
   Meteor.publish('steamId', function() {
     return SteamId;
   });
+=======
+    Meteor.publish('steamId', function championsPublication() {
+        return SteamId;
+    });
+>>>>>>> b2ef2c3eb44b627b9a8e0c760db1450194738919
 }
 
 export const SteamId = new Mongo.Collection('steamId');
