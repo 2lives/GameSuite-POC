@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import fetch from 'node-fetch';
 
 const League = new Mongo.Collection('league');
-const SummonerId = new Mongo.Collection('summonerid');
+// const SummonerId = new Mongo.Collection('summonerid');
 
 const apiKey = 'RGAPI-df014151-084c-4946-9f39-761b5d1805e1';
 //  Meteor.methods({
