@@ -1,2 +1,2 @@
-import SteamLogin from './SteamLogin';
-export default SteamLogin;
+import csGOstatgrab from './SteamLogin';
+export default csGOstatgrab;

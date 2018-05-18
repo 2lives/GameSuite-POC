@@ -45,6 +45,32 @@ Accounts.validateNewUser(user => {
   }
 });
 /**
+ * Fetch CS:GO Stats from database
+ */
+const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
+const placeHolderId = '76561198041950916';
+
+Meteor.methods({
+  'Meteor.users.GetCSGOStats'(result) {
+    HTTP.call(
+      'GET',
+      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${APIkey}&steamid=${placeHolderId} `,
+      {},
+      (error, result) => {
+        if (!error) {
+          Meteor.users.update(
+            { _id: Meteor.userId() },
+            { $set: { 'profile.steam.csgo': result } },
+            { upsert: true }
+          );
+          const steamUserKey = Meteor.userId().find(user.profile.steam.id);
+          console.log(steamUserKey);
+        }
+      }
+    );
+  }
+});
+/**
  * Adds fortnite data to user object
  */
 

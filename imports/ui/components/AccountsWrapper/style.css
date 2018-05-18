@@ -1,5 +1,9 @@
 /* Account Login */
 /*-----------------------------------------*/
+.or,
+.login-text-and-button {
+  display: none;
+}
 
 .app-wrapper {
   align-items: center;

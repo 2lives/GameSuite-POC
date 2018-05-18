@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import IconButton from 'material-ui/IconButton';
+import csGOstatgrab from '../../components/SteamLogin';
 
 class SteamLogin extends Component {
   SteamId() {
     Meteor.loginWithSteam();
     console.log('clicked');
+
+    // Meteor.call('Meteor.users.GetCSGOStats',())
   }
   render() {
     return (
