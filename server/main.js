@@ -44,3 +44,12 @@ Accounts.validateNewUser(user => {
     return true;
   }
 });
+/**
+ * Adds fortnite data to user object
+ */
+export const FortniteUpdate = event => {
+  Meteor.users.update(
+    { _id: Meteor.userId() },
+    { $set: { 'services.fortnite.id': this.state.value } }
+  );
+};
