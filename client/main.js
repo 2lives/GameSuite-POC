@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import Routes from '../routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { League } from '../imports/apis';
-import { Fortnite } from '../imports/apis';
 
 import muiTheme from '../config/themes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -42,9 +41,8 @@ class GameSuiteContainer extends Component {
 }
 
 const GameSuite = withTracker(() => {
-    Meteor.subscribe('fortnite', 'league');
+    Meteor.subscribe('league');
     return {
-        fortnite: Fortnite.find().fetch(),
         league: League.find().fetch()
     };
 })(GameSuiteContainer);

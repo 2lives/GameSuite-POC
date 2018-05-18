@@ -10,7 +10,6 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 import { Meteor } from 'meteor/meteor';
 import { League } from '../../apis';
-import { Fortnite } from '../../apis';
 import { withTracker } from 'meteor/react-meteor-data';
 
 const styles = {
@@ -109,9 +108,8 @@ class ProfileContainer extends Component {
 }
 
 const Profile = withTracker(() => {
-    Meteor.subscribe('fortnite', 'league');
+    Meteor.subscribe('league');
     return {
-        fortnite: Fortnite.find().fetch(),
         league: League.find().fetch()
     };
 })(ProfileContainer);

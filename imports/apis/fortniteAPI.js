@@ -3,7 +3,9 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 
-const Fotnite = Mongo.Collection;
+// Meteor.methods({
+
+// });
 
 HTTP.call(
   'GET',
@@ -31,5 +33,3 @@ if (Meteor.isServer) {
     return Fortnite.find();
   });
 }
-
-export default Fortnite;
