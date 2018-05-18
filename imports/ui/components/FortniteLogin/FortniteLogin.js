@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { Meteor } from 'meteor/meteor';
-
-// import { FortniteUpdate } from '../../../../server/main';
-
-// const UserVal = 'calvintyvm';
+import { getFortniteData } from '../../../apis/fortniteAPI';
 
 class FortniteLogin extends Component {
     constructor(props) {
@@ -26,12 +23,7 @@ class FortniteLogin extends Component {
         const FortniteInput = this.state.value;
 
         Meteor.call('Meteor.users.InsertFortnite', FortniteInput);
-        // Meteor.users.update(
-        //   { _id: Meteor.userId() },
-        //   {
-        //     $set: { 'services.fortnite.id': FortniteInput }
-        //   }
-        //   );
+        Meteor.call('Meteor.users.FetchFortniteData', FortniteInput);
     }
 
     render() {
