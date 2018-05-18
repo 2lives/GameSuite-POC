@@ -52,6 +52,26 @@ Accounts.validateNewUser(user => {
  */
 
 Meteor.methods({
+    'Meteor.users.GetCSGOStats'(result) {
+        const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
+        const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
+            .steam.id;
+        console.log(steamId);
+        HTTP.call(
+            'GET',
+            `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${APIkey}&steamid=${steamId} `,
+            {},
+            (error, result) => {
+                if (!error) {
+                    Meteor.users.update(
+                        { _id: Meteor.userId() },
+                        { $set: { 'profile.steam.csgo': result } },
+                        { upsert: true }
+                    );
+                }
+            }
+        );
+    },
     'Meteor.users.InsertFortnite'(input) {
         Meteor.users.update(
             { _id: Meteor.userId() },

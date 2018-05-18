@@ -14,39 +14,39 @@ import AccountsUIWrapper from '../imports/ui/components/AccountsWrapper';
 import Layout from '../imports/ui/components/Layout';
 
 class GameSuiteContainer extends Component {
-    //     getProfile(user) {
-    //         Meteor.call('fortnite.getProfile');
-    //     }
-    //     getStaticData() {
-    //         Meteor.call('champions.getStaticData');
-    //     }
+  //     getProfile(user) {
+  //         Meteor.call('fortnite.getProfile');
+  //     }
+  //     getStaticData() {
+  //         Meteor.call('champions.getStaticData');
+  //     }
 
-    render() {
-        //    console.log(this.props.fortnite);
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <div>
-                    <div className="login-wrapper">
-                        <AccountsUIWrapper />
-                    </div>
-                    <Router>
-                        <Layout>
-                            <Routes />
-                        </Layout>
-                    </Router>
-                </div>
-            </MuiThemeProvider>
-        );
-    }
+  render() {
+    //    console.log(this.props.fortnite);
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <div className="login-wrapper">
+            <AccountsUIWrapper />
+          </div>
+          <Router>
+            <Layout>
+              <Routes />
+            </Layout>
+          </Router>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
 }
 
 const GameSuite = withTracker(() => {
-    Meteor.subscribe('league');
-    return {
-        league: League.find().fetch()
-    };
+  Meteor.subscribe('league');
+  return {
+    league: League.find().fetch()
+  };
 })(GameSuiteContainer);
 
 Meteor.startup(() => {
-    ReactDOM.render(<GameSuite />, document.getElementById('root'));
+  ReactDOM.render(<GameSuite />, document.getElementById('root'));
 });
