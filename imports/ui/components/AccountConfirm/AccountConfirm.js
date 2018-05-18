@@ -1,47 +1,45 @@
-import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// import React, { Component } from 'react';
+// import Dialog from 'material-ui/Dialog';
+// import FlatButton from 'material-ui/FlatButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 
-/**
- * A modal dialog can only be closed by selecting one of the actions.
- */
-export default class DialogExampleModal extends Component {
-  state = {
-    open: false
-  };
+// import LeagueLogin from '../LeagueLogin';
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+// /**
+//  * A modal dialog can only be closed by selecting one of the actions.
+//  */
+// export default class AccountConfirm extends Component {
+//   state = {
+//     open: false
+//   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+//   handleOpen = () => {
+//     this.setState({ open: true });
+//   };
 
-  render() {
-    const actions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.handleClose} />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        disabled={true}
-        onClick={this.handleClose}
-      />
-    ];
+//   handleClose = () => {
+//     this.setState({ open: false });
+//   };
 
-    return (
-      <div>
-        <RaisedButton label="Submit Name" onClick={this.handleOpen} />
-        <Dialog
-          title="Confirm your selection"
-          actions={actions}
-          modal={true}
-          open={this.state.open}
-        >
-          Please confirm
-        </Dialog>
-      </div>
-    );
-  }
-}
+//   render() {
+//     const actions = [
+//       <FlatButton label="Close" primary={true} onClick={this.handleClose} />
+//     ];
+// const leagueName = Meteor.users.findOne({ _id: Meteor.userId() }).profile
+//   .league.AccData.Name;
+
+//     return (
+//       <div>
+//         <RaisedButton label="Register an Account" onClick={this.handleOpen} />
+//         <Dialog
+//           title="You have registered an account!"
+//           actions={actions}
+//           modal={true}
+//           open={this.state.open}
+//         >
+//           <p>`Submitted Name was ${leagueName}`</p>
+//         </Dialog>
+//       </div>
+//     );
+//   }
+// }
