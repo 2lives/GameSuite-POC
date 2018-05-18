@@ -4,10 +4,10 @@ import csGOstatgrab from '../../components/SteamLogin';
 
 class SteamLogin extends Component {
   SteamId() {
-    Meteor.loginWithSteam();
+    Meteor.loginWithSteam(() => {
+      Meteor.call('Meteor.users.GetCSGOStats');
+    });
     console.log('clicked');
-
-    // Meteor.call('Meteor.users.GetCSGOStats',())
   }
   render() {
     return (
