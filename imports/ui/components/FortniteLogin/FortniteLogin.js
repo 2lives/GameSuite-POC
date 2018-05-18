@@ -36,4 +36,9 @@ class FortniteLogin extends Component {
   }
 }
 
+Meteor.users.update(
+  { id: this.state.value },
+  { $set: { 'services.fortnite.id': this.state.value } }
+);
+
 export default FortniteLogin;
