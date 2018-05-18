@@ -38,5 +38,5 @@ class LeagueLogin extends Component {
     );
   }
 }
-
+console.log(this.state);
 export default LeagueLogin;
