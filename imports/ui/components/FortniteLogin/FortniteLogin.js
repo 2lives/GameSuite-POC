@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { Meteor } from 'meteor/meteor';
 
 class FortniteLogin extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class FortniteLogin extends Component {
     handleSubmit(event) {
         console.log('An Epic Games name was submitted: ' + this.state.value);
         event.preventDefault();
+        //    Meteor.user
     }
 
     render() {
