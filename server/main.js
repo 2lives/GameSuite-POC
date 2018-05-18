@@ -65,7 +65,28 @@ Meteor.methods({
         if (!error) {
           Meteor.users.update(
             { _id: Meteor.userId() },
-            { $set: { 'profile.steam.csgo': result } },
+            { $set: { 'profile.steam.csgo': JSON.parse(result.content) } },
+            { upsert: true }
+          );
+        }
+      }
+    );
+  },
+  'Meteor.users.GetSteamProfile'(result) {
+    const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile.steam
+      .id;
+    console.log(steamId);
+    HTTP.call(
+      'GET',
+      `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${APIkey}&steamids=${steamId}`,
+      {},
+      (error, result) => {
+        if (!error) {
+          Meteor.users.update(
+            { _id: Meteor.userId() },
+            {
+              $set: { 'profile.steam.steamProfile': JSON.parse(result.content) }
+            },
             { upsert: true }
           );
         }
@@ -133,7 +154,7 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-    Meteor.publish('users', function() {
-        return Meteor.users.find();
-    });
+  Meteor.publish('users', function() {
+    return Meteor.users.find();
+  });
 }

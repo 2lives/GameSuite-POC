@@ -25,6 +25,7 @@ class LeagueLogin extends Component {
 
   handleCloseDialog = () => {
     this.setState({ open: false });
+    this.state.value = '';
   };
 
   handleChange(event) {
@@ -33,7 +34,6 @@ class LeagueLogin extends Component {
 
   handleSubmit() {
     const summonerName = this.state.value;
-    // Meteor.call('Meteor.users.InsertLeague', summonerName);
     Meteor.call('Meteor.users.FetchLeagueData', summonerName);
   }
 
@@ -41,7 +41,7 @@ class LeagueLogin extends Component {
     const actions = [
       <FlatButton label="Ok" primary={true} onClick={this.handleCloseDialog} />
     ];
-    const test = 'this';
+    const inputValue = this.state.value;
 
     return (
       <div>
@@ -50,16 +50,16 @@ class LeagueLogin extends Component {
             value={this.state.value}
             onChange={this.handleChange}
             hintText="Summoner Name"
-            floatingLabelText="Input your Summoner Name here!"
+            floatingLabelText="Input your Summoner Name"
           />
           <Dialog
-            title="You have registered an account!"
+            title="You have registered a League of Legends Account!"
             actions={actions}
             modal={true}
             open={this.state.open}
           >
             <div>
-              <p>Confirm that your name is: {test}</p>
+              <p>The name you submitted was: {inputValue}</p>
             </div>
           </Dialog>
         </form>

@@ -6,6 +6,7 @@ class SteamLogin extends Component {
   SteamId() {
     Meteor.loginWithSteam(() => {
       Meteor.call('Meteor.users.GetCSGOStats');
+      Meteor.call('Meteor.users.GetSteamProfile');
     });
     console.log('clicked');
   }
