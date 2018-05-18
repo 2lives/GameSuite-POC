@@ -125,3 +125,9 @@ Meteor.methods({
             .then(result => console.log(result.name));
     }
 });
+
+if (Meteor.isServer) {
+    Meteor.publish('users', function() {
+        return Meteor.users.find();
+    });
+}
