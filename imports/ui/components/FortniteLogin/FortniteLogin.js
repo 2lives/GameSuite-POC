@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import { Meteor } from 'meteor/meteor';
+
+// import { FortniteUpdate } from '../../../../server/main';
+
+// const UserVal = 'calvintyvm';
+
 class FortniteLogin extends Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
+
     handleSubmit(event) {
         console.log('An Epic Games name was submitted: ' + this.state.value);
         event.preventDefault();
+        const FortniteInput = this.state.value;
+
+        Meteor.call('Meteor.users.InsertFortnite', FortniteInput);
         // Meteor.users.update(
         //   { _id: Meteor.userId() },
-        //   { $set: { 'services.fortnite.id': /*this.state.value*/ UserVal } }
-        // );
-        FortniteUpdate(this.state.value);
+        //   {
+        //     $set: { 'services.fortnite.id': FortniteInput }
+        //   }
+        //   );
     }
+
     render() {
         return (
             <div>

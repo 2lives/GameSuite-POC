@@ -47,9 +47,14 @@ Accounts.validateNewUser(user => {
 /**
  * Adds fortnite data to user object
  */
-export const FortniteUpdate = event => {
-    Meteor.users.update(
-        { _id: Meteor.userId() },
-        { $set: { 'services.fortnite.id': this.state.value } }
-    );
-};
+
+Meteor.methods({
+    'Meteor.users.InsertFortnite'(input) {
+        Meteor.users.update(
+            { _id: Meteor.userId() },
+            { $set: { 'profile.fortnite': input } },
+            { upsert: true }
+        );
+        console.log(Meteor.userId());
+    }
+});
