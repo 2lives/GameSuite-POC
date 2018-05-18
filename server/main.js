@@ -52,7 +52,9 @@ Meteor.methods({
   'Meteor.users.InsertFortnite'(input) {
     Meteor.users.update(
       { _id: Meteor.userId() },
-      { $set: { 'services.fortnite.id': input } }
+      { $set: { 'profile.fortnite': input } },
+      { upsert: true }
     );
+    console.log(Meteor.userId());
   }
 });
