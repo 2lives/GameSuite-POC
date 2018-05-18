@@ -7,6 +7,7 @@ import mainServer from '../imports/start-up/server';
 import SteamProfile from '../imports/apis/steamAPI';
 
 const LeagueAPIKey = 'RGAPI-8f2b435f-574f-4bb5-aa33-1a7e36d36432';
+const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 Meteor.startup(() => {
     ServiceConfiguration.configurations.upsert(
@@ -53,7 +54,6 @@ Accounts.validateNewUser(user => {
 
 Meteor.methods({
     'Meteor.users.GetCSGOStats'(result) {
-        const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
         const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
             .steam.id;
         console.log(steamId);
