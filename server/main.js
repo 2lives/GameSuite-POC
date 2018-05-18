@@ -1,9 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import fetch from 'node-fetch';
 
 import { Accounts } from 'meteor/accounts-base';
 import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
+
+const LeagueAPIKey = 'RGAPI-8f2b435f-574f-4bb5-aa33-1a7e36d36432';
 
 Meteor.startup(() => {
     ServiceConfiguration.configurations.upsert(
@@ -75,5 +78,30 @@ Meteor.methods({
                 }
             }
         );
+    },
+    'Meteor.users.FetchLeagueData'(summonerName) {
+        const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
+
+        const summonerInfo = summonerId =>
+            `https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/` +
+            summonerId +
+            `?api_key=${LeagueAPIKey}`;
+
+        const summonerId = fetch(getSummonerId)
+            .then(response => response.json())
+            .then(result => result.id)
+            .then(resp => summonerInfo(resp))
+            .then(result => fetch(result))
+            .then(resp => resp.json())
+            .then(result =>
+                Meteor.users.update(
+                    { _id: Meteor.userId() },
+                    { $set: { 'profile.league.data': result[0] } },
+                    { upsert: true }
+                )
+            );
+        const getSummonerName = fetch(getSummonerId)
+            .then(response => response.json())
+            .then(result => console.log(result.name));
     }
 });
