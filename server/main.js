@@ -6,7 +6,7 @@ import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
 
-const LeagueAPIKey = 'RGAPI-8f2b435f-574f-4bb5-aa33-1a7e36d36432';
+const LeagueAPIKey = 'RGAPI-376a3abd-9199-4eac-9154-978a27e6e2d6';
 const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 Meteor.startup(() => {
@@ -48,11 +48,18 @@ Accounts.validateNewUser(user => {
     return true;
   }
 });
-/**
- * Adds fortnite data to user object
- */
 
+/**
+ * Adds user ID on create input
+ */
 Meteor.methods({
+  'Meteor.users.CreateGameSuiteID'(input) {
+    Meteor.users.update(
+      { _id: Meteor.userId() },
+      { $set: { 'profile.gameSuiteId': input } },
+      { upsert: true }
+    );
+  },
   'Meteor.users.GetCSGOStats'(result) {
     const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile.steam
       .id;
@@ -65,7 +72,11 @@ Meteor.methods({
         if (!error) {
           Meteor.users.update(
             { _id: Meteor.userId() },
-            { $set: { 'profile.steam.csgo': JSON.parse(result.content) } },
+            {
+              $set: {
+                'profile.steam.csgo': JSON.parse(result.content)
+              }
+            },
             { upsert: true }
           );
         }
@@ -85,7 +96,9 @@ Meteor.methods({
           Meteor.users.update(
             { _id: Meteor.userId() },
             {
-              $set: { 'profile.steam.steamProfile': JSON.parse(result.content) }
+              $set: {
+                'profile.steam.steamProfile': JSON.parse(result.content)
+              }
             },
             { upsert: true }
           );
@@ -97,13 +110,6 @@ Meteor.methods({
     Meteor.users.update(
       { _id: Meteor.userId() },
       { $set: { 'profile.fortnite.id': input } },
-      { upsert: true }
-    );
-  },
-  'Meteor.users.CreateGameSuiteID'(input) {
-    Meteor.users.update(
-      { _id: Meteor.userId() },
-      { $set: { 'profile.gameSuiteId': input } },
       { upsert: true }
     );
   },
@@ -127,6 +133,7 @@ Meteor.methods({
       }
     );
   },
+
   'Meteor.users.FetchLeagueData'(summonerName) {
     const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
 
