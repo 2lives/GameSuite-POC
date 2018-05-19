@@ -100,6 +100,13 @@ Meteor.methods({
       { upsert: true }
     );
   },
+  'Meteor.users.CreateGameSuiteID'(input) {
+    Meteor.users.update(
+      { _id: Meteor.userId() },
+      { $set: { 'profile.gameSuiteId': input } },
+      { upsert: true }
+    );
+  },
   'Meteor.users.FetchFortniteData'(input) {
     HTTP.call(
       'GET',
