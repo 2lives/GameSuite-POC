@@ -6,30 +6,8 @@ import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
 
-const LeagueAPIKey = 'RGAPI-376a3abd-9199-4eac-9154-978a27e6e2d6';
-const APIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
-
-Meteor.startup(() => {
-  ServiceConfiguration.configurations.upsert(
-    { service: 'steam' },
-    {
-      $set: {
-        loginStyle: 'popup',
-        timeout: 10000
-      }
-    }
-  );
-  //   ServiceConfiguration.configurations.upsert(
-  //     { service: 'battlenet' },
-  //     {
-  //       $set: {
-  //         clientId: '8gxaf95jd99wm2xgt9hdkrxqpwm95fex',
-  //         scope: 'sc2.profile',
-  //         secret: 'W4EAyCKRRhjJKdMjpfX6kASydrYtdkaG'
-  //       }
-  //     }
-  //   );
-});
+const LeagueAPIKey = 'RGAPI-c8a884d2-e6ce-4f77-b780-dd81e44b201a';
+const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 /**
  * Adds steam user profile to existing logged in meteor account (if it exists)
@@ -49,47 +27,30 @@ Accounts.validateNewUser(user => {
   }
 });
 
-/**
- * Adds user ID on create input
- */
+/*************************** Meteor  Methods *********************************/
+
 Meteor.methods({
+  /**
+   * Adds user GameSuiteID on create input
+   */
   'Meteor.users.CreateGameSuiteID'(input) {
     Meteor.users.update(
       { _id: Meteor.userId() },
-      { $set: { 'profile.gameSuiteId': input } },
+      { $set: { 'profile.gamesuite.Id': input } },
       { upsert: true }
     );
   },
-  'Meteor.users.GetCSGOStats'(result) {
-    const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile.steam
-      .id;
-    console.log(steamId);
-    HTTP.call(
-      'GET',
-      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${APIkey}&steamid=${steamId} `,
-      {},
-      (error, result) => {
-        if (!error) {
-          Meteor.users.update(
-            { _id: Meteor.userId() },
-            {
-              $set: {
-                'profile.steam.csgo': JSON.parse(result.content)
-              }
-            },
-            { upsert: true }
-          );
-        }
-      }
-    );
-  },
+  /** ______________________________Steam___________________________ */
+  /**
+   * Gets steam profile summary from ID
+   */
   'Meteor.users.GetSteamProfile'(result) {
     const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile.steam
       .id;
     console.log(steamId);
     HTTP.call(
       'GET',
-      `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${APIkey}&steamids=${steamId}`,
+      `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${SteamAPIkey}&steamids=${steamId}`,
       {},
       (error, result) => {
         if (!error) {
@@ -106,6 +67,37 @@ Meteor.methods({
       }
     );
   },
+  /**
+   *  Gets Steam Profile ID and grabs CSGO game data
+   */
+  'Meteor.users.GetCSGOStats'(result) {
+    const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile.steam
+      .id;
+    console.log(steamId);
+    HTTP.call(
+      'GET',
+      `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${SteamAPIkey}&steamid=${steamId} `,
+      {},
+      (error, result) => {
+        if (!error) {
+          Meteor.users.update(
+            { _id: Meteor.userId() },
+            {
+              $set: {
+                'profile.steam.csgo': JSON.parse(result.content)
+              }
+            },
+            { upsert: true }
+          );
+        }
+      }
+    );
+  },
+
+  /** ______________________________Fortnite BR___________________________ */
+  /**
+   *  Inserts Fortnite ID in to user object
+   */
   'Meteor.users.InsertFortnite'(input) {
     Meteor.users.update(
       { _id: Meteor.userId() },
@@ -113,6 +105,9 @@ Meteor.methods({
       { upsert: true }
     );
   },
+  /**
+   * Fetches user FortniteData based off of FortniteID in user object
+   */
   'Meteor.users.FetchFortniteData'(input) {
     HTTP.call(
       'GET',
@@ -133,7 +128,27 @@ Meteor.methods({
       }
     );
   },
+  /** ______________________________League of Legends ___________________________ */
+  /**
+   * Gets summonerID by querying with the user object's Summoner Name
+   */
 
+  'League.GetChampionList'() {
+    HTTP.call(
+      'GET',
+      `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
+      { data: {} },
+      (error, result) => {
+        if (!error) {
+          League.update(
+            { user: 'static' },
+            { $set: { LeagueChampionsStaticList: result } },
+            { upsert: true }
+          );
+        }
+      }
+    );
+  },
   'Meteor.users.FetchLeagueData'(summonerName) {
     const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
 
@@ -141,7 +156,9 @@ Meteor.methods({
       `https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/` +
       summonerId +
       `?api_key=${LeagueAPIKey}`;
-
+    /**
+     * Gets champion mastery and account data by querying with the user object's SummonerID
+     */
     const summonerId = fetch(getSummonerId)
       .then(response => response.json())
       .then(result => result.id)
@@ -172,3 +189,32 @@ if (Meteor.isServer) {
     return Meteor.users.find();
   });
 }
+
+/*************************** Meteor StartUp *********************************/
+Meteor.startup(() => {
+  /**
+   * Register steam login configuration
+   */
+  ServiceConfiguration.configurations.upsert(
+    { service: 'steam' },
+    {
+      $set: {
+        loginStyle: 'popup',
+        timeout: 10000
+      }
+    }
+  );
+  /**
+   * Register blizzard login configuration
+   */
+  //   ServiceConfiguration.configurations.upsert(
+  //     { service: 'battlenet' },
+  //     {
+  //       $set: {
+  //         clientId: '8gxaf95jd99wm2xgt9hdkrxqpwm95fex',
+  //         scope: 'sc2.profile',
+  //         secret: 'W4EAyCKRRhjJKdMjpfX6kASydrYtdkaG'
+  //       }
+  //     }
+  //   );
+});

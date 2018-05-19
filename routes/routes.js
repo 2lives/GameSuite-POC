@@ -9,9 +9,9 @@ import Login from '../imports/ui/containers/Login';
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/" component={Login} />
       <Route exact path="/gameselect" component={GameTile} />
-      <Route exact path="/" component={Profile} />
+      <Route path="/profile" component={Profile} />
       {/* <Route exact path="/generalchat" component={GeneralChat} /> */}
       {/* <Route path="/*" component={NotFound} /> */}
     </Switch>

@@ -14,7 +14,8 @@ class Login extends Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     const gameSuiteID = this.state.value;
     Meteor.call('Meteor.users.CreateGameSuiteID', gameSuiteID);
   }
