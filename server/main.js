@@ -6,7 +6,7 @@ import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
 
-const LeagueAPIKey = 'RGAPI-c8a884d2-e6ce-4f77-b780-dd81e44b201a';
+const LeagueAPIKey = 'RGAPI-78c0cedf-a0c6-4ef2-8621-a5c4f548efdd';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 /**
@@ -36,10 +36,18 @@ Meteor.methods({
   'Meteor.users.CreateGameSuiteID'(input) {
     Meteor.users.update(
       { _id: Meteor.userId() },
-      { $set: { 'profile.gamesuite.Id': input } },
+      { $set: { 'profile.gamesuite.id': input } },
       { upsert: true }
     );
   },
+  'Meteor.users.CreateGameSuiteBio'(input) {
+    Meteor.users.update(
+      { _id: Meteor.userId() },
+      { $set: { 'profile.gamesuite.bio': input } },
+      { upsert: true }
+    );
+  },
+
   /** ______________________________Steam___________________________ */
   /**
    * Gets steam profile summary from ID
