@@ -22,7 +22,8 @@ const styles = {
         fontWeight: '300'
     },
     cardText: {
-        whiteSpace: 'pre-line'
+        whiteSpace: 'pre-line',
+        lineHeight: '1.5'
     },
     title: {
         fontWeight: '500'
@@ -40,14 +41,9 @@ class FortniteContainer extends Component {
         if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
             return <p>loading</p>;
         } else {
-            console.log(this.props.userLoggedin[0].profile);
-
             let fortniteProfile = JSON.parse(
                 this.props.userLoggedin[0].profile.fortnite.data
             );
-            let mostPlayed = this.props.userLoggedin[0].profile.league.data
-                .championId;
-            console.log(mostPlayed);
             console.log(fortniteProfile);
             return (
                 <div>
@@ -76,9 +72,6 @@ class FortniteContainer extends Component {
                                 {'\n'}
                                 Kill/ Death Ratio: {'\n'}
                                 {fortniteProfile.stats.p2.kd.value}
-                                {'\n'}
-                                Score per Match: {'\n'}
-                                {fortniteProfile.stats.p2.scorePerMatch.value}
                                 {'\n'}
                                 Matches Played in Current Season: {'\n'}
                                 {fortniteProfile.stats.p2.matches.value}

@@ -20,10 +20,12 @@ const styles = {
         height: '200px'
     },
     cardHeader: {
-        fontWeight: '300'
+        fontWeight: '300',
+        width: '255px'
     },
     cardText: {
-        whiteSpace: 'pre-line'
+        whiteSpace: 'pre-line',
+        lineHeight: '1.5'
     },
     title: {
         fontWeight: '500'
@@ -40,14 +42,30 @@ class LeagueContainer extends Component {
             let StaticChamps = JSON.parse(
                 this.props.league[0].LeagueChampionsStaticList.content
             );
-            console.log(StaticChamps);
+            let MostPlayed = this.props.userLoggedin[0].profile.league.data
+                .championId;
+            //   console.log(MostPlayed);
+            //   console.log(StaticChamps);
+            let MostPlayedChampName = StaticChamps.data;
+            //   console.log(MostPlayedChampName);
+            //   let ChampKeys = Object.keys(MostPlayedChampName);
+            //   console.log(ChampKeys);
+            //   console.log(ChampKeys.filter(champ => champ.i === MostPlayed));
+            var ids = '';
+            for (var champId in MostPlayedChampName) {
+                //  console.log(MostPlayedChampName[champId].id);
+                if (MostPlayedChampName[champId].id == MostPlayed) {
+                    ids = MostPlayedChampName[champId];
+                }
+            }
+            console.log(ids);
+            console.log(ids.info.attack);
+
             let leagueProfile = this.props.userLoggedin[0].profile.league;
 
             let fortniteProfile = JSON.parse(
                 this.props.userLoggedin[0].profile.fortnite.data
             );
-            let mostPlayed = this.props.userLoggedin[0].profile.league.data
-                .championId;
 
             return (
                 <div>
@@ -68,7 +86,13 @@ class LeagueContainer extends Component {
                             </div>
                             <CardText style={styles.cardText}>
                                 Most Played Champion:{'\n'}
-                                {leagueProfile.data.championId}
+                                {ids.name}, {ids.title}
+                                {'\n'}
+                                Champion Info:{'\n'}
+                                Attack: {ids.info.attack} &nbsp; Defense:{' '}
+                                {ids.info.defense} &nbsp; Magic:{' '}
+                                {ids.info.magic} &nbsp; Difficulty:{' '}
+                                {ids.info.difficulty}
                                 {'\n'}
                                 Champion Mastery Level:{'\n'}
                                 {leagueProfile.data.championLevel}

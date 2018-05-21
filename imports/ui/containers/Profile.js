@@ -13,6 +13,7 @@ import { League } from '../../apis';
 import { withTracker } from 'meteor/react-meteor-data';
 import { FortniteCard } from '../components/Cards';
 import { LeagueCard } from '../components/Cards';
+import { CSGOCard } from '../components/Cards';
 
 const styles = {
     marginBottom: '25px',
@@ -56,6 +57,7 @@ class ProfileContainer extends Component {
             <div>
                 <FortniteCard />
                 <LeagueCard />
+                <CSGOCard />
             </div>
             //  <div>
             //      <Card style={styles}>
