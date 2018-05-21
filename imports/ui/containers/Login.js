@@ -16,26 +16,31 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      id: '',
+      bio: '',
       stepIndex: 0
     };
     this.handleSubmitName = this.handleSubmitName.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeId = this.handleChangeId.bind(this);
+    this.handleChangeBio = this.handleChangeBio.bind(this);
     this.handleSubmitBio = this.handleSubmitBio.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChangeId(event) {
+    this.setState({ id: event.target.value });
+  }
+  handleChangeBio(event) {
+    this.setState({ bio: event.target.value });
   }
 
   handleSubmitBio(e) {
     e.preventDefault();
-    const gameSuiteBio = this.state.value;
+    const gameSuiteBio = this.state.bio;
     Meteor.call('Meteor.users.CreateGameSuiteBio', gameSuiteBio);
   }
   handleSubmitName(e) {
     e.preventDefault();
-    const gameSuiteID = this.state.value;
+    const gameSuiteID = this.state.id;
     Meteor.call('Meteor.users.CreateGameSuiteID', gameSuiteID);
   }
 
@@ -83,16 +88,17 @@ class Login extends Component {
       <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
         <form onSubmit={this.handleSubmitName}>
           <TextField
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.state.id}
+            onChange={this.handleChangeId}
             hintText="GameSuiteID"
             floatingLabelText="Create a GameSuiteID"
           />
         </form>
+        {/* <LoginID /> */}
         <form onSubmit={this.handleSubmitBio}>
           <TextField
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.state.bio}
+            onChange={this.handleChangeBio}
             hintText="'ie, My favourite CS map is dust2'"
             floatingLabelText="Add a Bio"
           />

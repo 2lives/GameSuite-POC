@@ -22,15 +22,13 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmitName}>
-          <TextField
-            value={this.state.value}
-            onChange={this.handleChange}
-            hintText="GameSuiteID"
-          />
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmitName}>
+        <TextField
+          value={this.state.value}
+          onChange={this.handleChange}
+          hintText="GameSuiteID"
+        />
+      </form>
     );
   }
 }

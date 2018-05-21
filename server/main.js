@@ -6,7 +6,7 @@ import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
 
-const LeagueAPIKey = 'RGAPI-78c0cedf-a0c6-4ef2-8621-a5c4f548efdd';
+const LeagueAPIKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 /**
@@ -103,6 +103,63 @@ Meteor.methods({
             }
         );
     },
+  /** ______________________________Fortnite BR___________________________ */
+  /**
+   *  Inserts Fortnite ID in to user object
+   */
+  'Meteor.users.InsertFortnite'(input) {
+    Meteor.users.update(
+      { _id: Meteor.userId() },
+      { $set: { 'profile.fortnite.id': input } },
+      { upsert: true }
+    );
+  },
+  /**
+   * Fetches user FortniteData based off of FortniteID in user object
+   */
+  'Meteor.users.FetchFortniteData'(input) {
+    HTTP.call(
+      'GET',
+      `https://api.fortnitetracker.com/v1/profile/pc/${input}`,
+      {
+        headers: {
+          'TRN-Api-Key': 'e5c756b6-f460-45e3-9653-d878c0a535dc'
+        }
+      },
+      (error, result) => {
+        if (!error) {
+          Meteor.users.update(
+            { _id: Meteor.userId() },
+            { $set: { 'profile.fortnite.data': result.content } },
+            { upsert: true }
+          );
+        }
+      }
+    );
+  },
+  /** ______________________________League of Legends ___________________________ */
+  /**
+   * Gets summonerID by querying with the user object's Summoner Name
+   */
+
+  'league.GetChampionList'() {
+    HTTP.call(
+      'GET',
+      `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
+      { data: {} },
+      (error, result) => {
+        if (!error) {
+          League.update(
+            { user: 'static' },
+            { $set: { LeagueChampionsStaticList: result } },
+            { upsert: true }
+          );
+        }
+      }
+    );
+  },
+  'Meteor.users.FetchLeagueData'(summonerName) {
+    const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
 
     /** ______________________________Fortnite BR___________________________ */
     /**
