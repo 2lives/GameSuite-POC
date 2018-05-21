@@ -35,6 +35,7 @@ class LeagueLogin extends Component {
   handleSubmit() {
     const summonerName = this.state.value;
     Meteor.call('Meteor.users.FetchLeagueData', summonerName);
+    // Meteor.call('league.GetChampionList');
   }
 
   render() {

@@ -6,7 +6,7 @@ import mainServer from '../imports/start-up/server';
 
 import SteamProfile from '../imports/apis/steamAPI';
 
-const LeagueAPIKey = 'RGAPI-78c0cedf-a0c6-4ef2-8621-a5c4f548efdd';
+const LeagueAPIKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
 /**
@@ -141,7 +141,7 @@ Meteor.methods({
    * Gets summonerID by querying with the user object's Summoner Name
    */
 
-  'League.GetChampionList'() {
+  'league.GetChampionList'() {
     HTTP.call(
       'GET',
       `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
