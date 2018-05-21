@@ -103,64 +103,6 @@ Meteor.methods({
             }
         );
     },
-  /** ______________________________Fortnite BR___________________________ */
-  /**
-   *  Inserts Fortnite ID in to user object
-   */
-  'Meteor.users.InsertFortnite'(input) {
-    Meteor.users.update(
-      { _id: Meteor.userId() },
-      { $set: { 'profile.fortnite.id': input } },
-      { upsert: true }
-    );
-  },
-  /**
-   * Fetches user FortniteData based off of FortniteID in user object
-   */
-  'Meteor.users.FetchFortniteData'(input) {
-    HTTP.call(
-      'GET',
-      `https://api.fortnitetracker.com/v1/profile/pc/${input}`,
-      {
-        headers: {
-          'TRN-Api-Key': 'e5c756b6-f460-45e3-9653-d878c0a535dc'
-        }
-      },
-      (error, result) => {
-        if (!error) {
-          Meteor.users.update(
-            { _id: Meteor.userId() },
-            { $set: { 'profile.fortnite.data': result.content } },
-            { upsert: true }
-          );
-        }
-      }
-    );
-  },
-  /** ______________________________League of Legends ___________________________ */
-  /**
-   * Gets summonerID by querying with the user object's Summoner Name
-   */
-
-  'league.GetChampionList'() {
-    HTTP.call(
-      'GET',
-      `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
-      { data: {} },
-      (error, result) => {
-        if (!error) {
-          League.update(
-            { user: 'static' },
-            { $set: { LeagueChampionsStaticList: result } },
-            { upsert: true }
-          );
-        }
-      }
-    );
-  },
-  'Meteor.users.FetchLeagueData'(summonerName) {
-    const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
-
     /** ______________________________Fortnite BR___________________________ */
     /**
      *  Inserts Fortnite ID in to user object
@@ -200,22 +142,22 @@ Meteor.methods({
      * Gets summonerID by querying with the user object's Summoner Name
      */
 
-    'Meteor.league.GetChampionList'() {
-        HTTP.call(
-            'GET',
-            `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
-            { data: {} },
-            (error, result) => {
-                if (!error) {
-                    League.update(
-                        { user: 'static' },
-                        { $set: { LeagueChampionsStaticList: result } },
-                        { upsert: true }
-                    );
-                }
-            }
-        );
-    },
+    //     'Meteor.league.GetChampionList'() {
+    //         HTTP.call(
+    //             'GET',
+    //             `https://na1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&champListData=info&dataById=false&api_key=${LeagueAPIKey}`,
+    //             { data: {} },
+    //             (error, result) => {
+    //                 if (!error) {
+    //                     League.update(
+    //                         { user: 'static' },
+    //                         { $set: { LeagueChampionsStaticList: result } },
+    //                         { upsert: true }
+    //                     );
+    //                 }
+    //             }
+    //         );
+    //     },
     'Meteor.users.FetchLeagueData'(summonerName) {
         const getSummonerId = `https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${summonerName}?api_key=${LeagueAPIKey}`;
 
