@@ -39,7 +39,15 @@ class CSGOContainer extends Component {
         if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
             return <p>loading</p>;
         } else {
-            console.log(this.props.userLoggedin[0].profile.steam.csgo);
+            let CSGOName = this.props.userLoggedin[0].profile.steam.steamProfile
+                .response.players[0].personaname;
+            let CSGORealName = this.props.userLoggedin[0].profile.steam
+                .steamProfile.response.players[0].realname;
+
+            let CSGOStats = this.props.userLoggedin[0].profile.steam.csgo
+                .playerstats.stats;
+            console.log(CSGOStats);
+            console.log(CSGOStats[2].value);
             return (
                 <div>
                     <Card style={styles}>
@@ -52,10 +60,21 @@ class CSGOContainer extends Component {
                                     style={styles.cardHeader}
                                 />
                                 <span style={styles.username}>Username:</span>
-                                <CardTitle title="hello" style={styles.title} />
+                                <CardTitle
+                                    title={CSGOName}
+                                    style={styles.title}
+                                />
                             </div>
 
-                            <CardText style={styles.cardText} />
+                            <CardText style={styles.cardText}>
+                                {CSGORealName}
+                                {'\n'}
+                                Total In Game Hours: {'\n'}
+                                {Math.round(CSGOStats[2].value / 60 / 60)}
+                                {'\n'}
+                                Total Kills: {'\n'}
+                                {CSGOStats[0].value}
+                            </CardText>
                         </div>
                     </Card>
                 </div>
