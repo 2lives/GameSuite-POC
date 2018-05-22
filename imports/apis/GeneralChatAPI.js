@@ -10,3 +10,4 @@ if (Meteor.isServer) {
         return Messages.find();
     });
 }
+export default Messages;

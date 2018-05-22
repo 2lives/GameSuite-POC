@@ -9,6 +9,7 @@ import SteamProfile from '../imports/apis/steamAPI';
 const LeagueAPIKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
+const Messages = new Mongo.Collection('messages');
 /**
  * Adds steam user profile to existing logged in meteor account (if it exists)
  */
@@ -46,6 +47,14 @@ Meteor.methods({
             { $set: { 'profile.gamesuite.bio': input } },
             { upsert: true }
         );
+    },
+    /** _____________________________Messages___________________________ */
+    /**
+     * posting to messages collection
+     */
+    'Meteor.messages.postMessage'(message) {
+        console.log(message);
+        Messages.insert({ text: message });
     },
 
     /** ______________________________Steam___________________________ */
@@ -194,8 +203,11 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-    Meteor.publish('users', function() {
-        return Meteor.users.find();
+    Meteor.publish('users', 'messages', function() {
+        return {
+            users: Meteor.users.find(),
+            messages: Messages.find()
+        };
     });
 }
 

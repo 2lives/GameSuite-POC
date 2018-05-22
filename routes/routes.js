@@ -1,5 +1,11 @@
 import React from 'react';
-import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Link,
+    Redirect
+} from 'react-router-dom';
 import Profile from '../imports/ui/containers/Profile';
 import GameTile from '../imports/ui/containers/SelectAccUI';
 import Login from '../imports/ui/containers/Login';

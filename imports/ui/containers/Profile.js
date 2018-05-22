@@ -42,9 +42,9 @@ class ProfileContainer extends Component {
             <div>
                 <Paper>
                     <p>Profile: Name</p>
-                    <FortniteCard />
-                    <LeagueCard />
-                    <CSGOCard />
+                    <FortniteCard routerProps={this.props} />
+                    <LeagueCard routerProps={this.props} />
+                    <CSGOCard routerProps={this.props} />
                 </Paper>
             </div>
         );

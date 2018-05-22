@@ -44,7 +44,7 @@ class FortniteContainer extends Component {
             let fortniteProfile = JSON.parse(
                 this.props.userLoggedin[0].profile.fortnite.data
             );
-            console.log(fortniteProfile);
+
             return (
                 <div>
                     <Card style={styles}>
