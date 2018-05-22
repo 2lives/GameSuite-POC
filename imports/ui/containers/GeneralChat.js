@@ -18,7 +18,8 @@ class GeneralChatContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: ''
+            message: '',
+            messages: []
         };
         this.handleSubmitMessage = this.handleSubmitMessage.bind(this);
         this.handleChangeMessage = this.handleChangeMessage.bind(this);
@@ -33,18 +34,28 @@ class GeneralChatContainer extends Component {
         Meteor.call('Meteor.message.PostMessage', submittedMessage);
     }
     render() {
-        return (
-            <div>
-                <p>Chat goes here</p>
-                <form onSubmit={this.handleSubmitMessage}>
-                    <TextField
-                        onChange={this.handleChangeMessage}
-                        hintText="Compose Message"
-                        floatingLabelText="Chat with us!"
-                    />
-                </form>
-            </div>
-        );
+        if (!this.props.messages || !this.props.messages.length) {
+            return <p>loading</p>;
+        } else {
+            let messageObjs = this.props.messages.map(
+                messages => messages.text
+            );
+            console.log(messageObjs);
+
+            return (
+                <div>
+                    <div className="messageBox" />
+
+                    <form onSubmit={this.handleSubmitMessage}>
+                        <TextField
+                            onChange={this.handleChangeMessage}
+                            hintText="Compose Message"
+                            floatingLabelText="Chat with us!"
+                        />
+                    </form>
+                </div>
+            );
+        }
     }
 }
 
