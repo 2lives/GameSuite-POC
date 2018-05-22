@@ -11,9 +11,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 
-import { withTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 
-import { BrowserRouter as Link } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -76,7 +76,15 @@ class LoginContainer extends Component {
     return (
       <div style={{ margin: '12px 0' }}>
         <RaisedButton
-          label={stepIndex === 2 ? 'Add Games' : 'Next'}
+          label={
+            stepIndex === 2 ? (
+              <Link to={'/gameselect'} style={{ textDecoration: 'none' }}>
+                Add Games
+              </Link>
+            ) : (
+              'Next'
+            )
+          }
           disableTouchRipple={true}
           disableFocusRipple={true}
           primary={true}
@@ -98,7 +106,7 @@ class LoginContainer extends Component {
 
   render() {
     const { finished, stepIndex } = this.state;
-    if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
+    if (!Meteor.userId()) {
       return (
         <div
           style={{
