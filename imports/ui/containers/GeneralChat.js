@@ -36,7 +36,9 @@ class GeneralChatContainer extends Component {
   }
   render() {
     let messageObjs = this.props.messages.map(messages => (
-      <li>{messages.text}</li>
+      <li>
+        {messages[0].poster}: {messages[1].text}
+      </li>
     ));
 
     return (
@@ -50,7 +52,9 @@ class GeneralChatContainer extends Component {
         <ul
           style={{
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            overflow: 'scroll',
+            maxHeight: '200px'
           }}
         >
           {messageObjs}

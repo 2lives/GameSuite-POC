@@ -53,7 +53,7 @@ Meteor.methods({
    */
   'Meteor.messages.postMessage'(message) {
     console.log(message);
-    Messages.insert({ text: message });
+    Messages.insert([{ poster: Meteor.userId() }, { text: message }]);
   },
 
   /** ______________________________Steam___________________________ */
