@@ -3,13 +3,12 @@ import fetch from 'node-fetch';
 
 import { Accounts } from 'meteor/accounts-base';
 import mainServer from '../imports/start-up/server';
-
+import Messages from '../imports/apis/GeneralChatAPI';
 import SteamProfile from '../imports/apis/steamAPI';
 
 const LeagueAPIKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
-const Messages = new Mongo.Collection('messages');
 /**
  * Adds steam user profile to existing logged in meteor account (if it exists)
  */
@@ -203,11 +202,9 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-    Meteor.publish('users', 'messages', function() {
-        return {
-            users: Meteor.users.find(),
-            messages: Messages.find()
-        };
+    Meteor.publish('users', function() {
+        return;
+        users: Meteor.users.find();
     });
 }
 
