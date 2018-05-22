@@ -31,7 +31,7 @@ class GeneralChatContainer extends Component {
     handleSubmitMessage(e) {
         e.preventDefault();
         const submittedMessage = this.state.message;
-        Meteor.call('Meteor.message.PostMessage', submittedMessage);
+        Meteor.call('Meteor.message.postMessage', submittedMessage);
     }
     render() {
         if (!this.props.messages || !this.props.messages.length) {
