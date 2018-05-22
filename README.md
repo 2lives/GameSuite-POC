@@ -7,7 +7,7 @@ GameSuite is a platform for competitive gamers, on which players can chat, organ
 ## A Glimpse
 
 ![GameSuite game tiles](public/assets/images/GameSuitePic1.png)
-<img src="/public/assets/images/FireShot Capture 19 - GameSuite - http_**localhost*3000*">
+![GameSuite create user profile](public/assets/images/GameSuitePic2.png)
 
 ### Currently Supported Competitive e-Sports:
 
