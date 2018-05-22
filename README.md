@@ -11,3 +11,7 @@ GameSuite is a platform for competitive gamers, on which players can chat, organ
 *   CounterStrike Global Offensive (CSGO)
 
 ### Future Considerations
+
+*   Implement a friends list
+*   Individual chatting system
+*   Incorporate Blizzard competitive games
