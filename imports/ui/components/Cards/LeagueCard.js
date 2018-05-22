@@ -39,33 +39,21 @@ class LeagueContainer extends Component {
         if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
             return <p>loading</p>;
         } else {
+            console.log(this.props);
             let StaticChamps = JSON.parse(
                 this.props.league[0].LeagueChampionsStaticList.content
             );
             let MostPlayed = this.props.userLoggedin[0].profile.league.data
                 .championId;
-            //   console.log(MostPlayed);
-            //   console.log(StaticChamps);
             let MostPlayedChampName = StaticChamps.data;
-            //   console.log(MostPlayedChampName);
-            //   let ChampKeys = Object.keys(MostPlayedChampName);
-            //   console.log(ChampKeys);
-            //   console.log(ChampKeys.filter(champ => champ.i === MostPlayed));
             var ids = '';
             for (var champId in MostPlayedChampName) {
-                //  console.log(MostPlayedChampName[champId].id);
                 if (MostPlayedChampName[champId].id == MostPlayed) {
                     ids = MostPlayedChampName[champId];
                 }
             }
-            console.log(ids);
-            console.log(ids.info.attack);
 
             let leagueProfile = this.props.userLoggedin[0].profile.league;
-
-            let fortniteProfile = JSON.parse(
-                this.props.userLoggedin[0].profile.fortnite.data
-            );
 
             return (
                 <div>
