@@ -10,6 +10,8 @@ import FortniteLogin from '../components/FortniteLogin';
 
 import SteamLogin from '../components/SteamLogin';
 
+import { Link } from 'react-router-dom';
+
 const styles = {
   root: {
     display: 'flex',
@@ -57,6 +59,9 @@ const GameGridList = () => (
       {/* <FlatButton>Click Me!</FlatButton> */}
       {/* </GridTile> */}
     </GridList>
+    <Link to={`/profile/${Meteor.userId()}`} style={{ textDecoration: 'none' }}>
+      <FlatButton>Go to Profile</FlatButton>
+    </Link>
   </div>
 );
 
