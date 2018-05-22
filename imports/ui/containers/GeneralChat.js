@@ -34,10 +34,28 @@ class GeneralChatContainer extends Component {
     Meteor.call('Meteor.messages.postMessage', submittedMessage);
     this.state.message = '';
   }
+
+  scrollToBottom = () => {
+    const { messageList } = this.refs;
+    const scrollHeight = messageList.scrollHeight;
+    const height = messageList.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    ReactDOM.findDOMNode(messageList).scrollTop =
+      maxScrollTop > 0 ? maxScrollTop : 0;
+  };
   render() {
     let messageObjs = this.props.messages.map(messages => (
-      <li>
-        {messages[0].poster}: {messages[1].text}
+      <li
+        style={{
+          margin: '5px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '30vw',
+          padding: '5px'
+        }}
+      >
+        <p>{Meteor.users.findOne(messages[0].poster).profile.gamesuite.id}:</p>
+        <p>{messages[1].text}</p>
       </li>
     ));
 
@@ -45,22 +63,37 @@ class GeneralChatContainer extends Component {
       <div
         style={{
           display: 'flex',
+          justifyContent: 'center',
           flexDirection: 'column',
-          justifyContent: 'center'
+          margin: 'auto'
         }}
       >
-        <ul
+        <Paper
           style={{
             display: 'flex',
+            justifyContent: 'center',
             flexDirection: 'column',
-            overflow: 'scroll',
-            maxHeight: '200px'
+            margin: 'auto',
+            padding: '20px',
+            minWidth: '200px'
           }}
         >
-          {messageObjs}
-        </ul>
+          <ul
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'scroll',
+              maxHeight: '200px',
+              justifyContent: 'center',
+              margin: 'auto'
+            }}
+          >
+            <h2> Welcome to the General Chat! </h2>
+            {messageObjs}
+          </ul>
+        </Paper>
 
-        <form onSubmit={this.handleSubmitMessage}>
+        <form onSubmit={this.handleSubmitMessage} style={{ margin: 'auto' }}>
           <TextField
             value={this.state.message}
             onChange={this.handleChangeMessage}

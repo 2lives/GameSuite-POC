@@ -59,9 +59,6 @@ const GameGridList = () => (
       {/* <FlatButton>Click Me!</FlatButton> */}
       {/* </GridTile> */}
     </GridList>
-    <Link to={`/profile/${Meteor.userId()}`} style={{ textDecoration: 'none' }}>
-      <FlatButton>Go to Profile</FlatButton>
-    </Link>
   </div>
 );
 

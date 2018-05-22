@@ -59,6 +59,14 @@ class LoginContainer extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
+    if (stepIndex === 0) {
+      const gameSuiteID = this.state.id;
+      Meteor.call('Meteor.users.CreateGameSuiteID', gameSuiteID);
+    }
+    if (stepIndex === 1) {
+      const gameSuiteBio = this.state.bio;
+      Meteor.call('Meteor.users.CreateGameSuiteBio', gameSuiteBio);
+    }
     if (stepIndex < 2) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
@@ -78,7 +86,10 @@ class LoginContainer extends Component {
         <RaisedButton
           label={
             stepIndex === 2 ? (
-              <Link to={'/gameselect'} style={{ textDecoration: 'none' }}>
+              <Link
+                to={'/gameselect'}
+                style={{ textDecoration: 'none', color: 'white' }}
+              >
                 Add Games
               </Link>
             ) : (
@@ -136,6 +147,7 @@ class LoginContainer extends Component {
               <StepContent>
                 <form onSubmit={this.handleSubmitName}>
                   <TextField
+                    required
                     value={this.state.id}
                     onChange={this.handleChangeId}
                     hintText="GameSuiteID"
@@ -150,6 +162,7 @@ class LoginContainer extends Component {
               <StepContent>
                 <form onSubmit={this.handleSubmitBio}>
                   <TextField
+                    required
                     value={this.state.bio}
                     onChange={this.handleChangeBio}
                     hintText="'ie, My favourite CS map is dust2'"
