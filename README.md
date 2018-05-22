@@ -9,7 +9,7 @@ GameSuite is a platform for competitive gamers, on which players can chat, organ
 <img src="/public/assets/images/FireShot Capture 18 - GameSuite - http___localhost_3000_profile_kzquHsbePc89fg6Xg"/>
 <img src="/public/assets/images/FireShot Capture 19 - GameSuite - http___localhost_3000_"/>
 
-### Currently supported competitive e-sports:
+### Currently Supported Competitive e-Sports:
 
 *   League of Legends
 *   Fortnite
