@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Card,
-    CardActions,
-    CardHeader,
-    CardMedia,
-    CardTitle,
-    CardText
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+  CardText
 } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { Meteor } from 'meteor/meteor';
@@ -13,26 +13,26 @@ import { withTracker } from 'meteor/react-meteor-data';
 import League from '../../../apis/riotAPI';
 
 const styles = {
-    marginBottom: '25px',
-    width: '75vw',
-    cardWrapper: {
-        display: 'flex',
-        height: '200px'
-    },
-    cardHeader: {
-        fontWeight: '300',
-        width: '255px'
-    },
-    cardText: {
-        whiteSpace: 'pre-line',
-        lineHeight: '1.5'
-    },
-    title: {
-        fontWeight: '500'
-    },
-    username: {
-        marginLeft: '15px'
-    }
+  marginBottom: '25px',
+  width: '75vw',
+  cardWrapper: {
+    display: 'flex',
+    height: '200px'
+  },
+  cardHeader: {
+    fontWeight: '300',
+    width: '255px'
+  },
+  cardText: {
+    whiteSpace: 'pre-line',
+    lineHeight: '1.5'
+  },
+  title: {
+    fontWeight: '500'
+  },
+  username: {
+    marginLeft: '15px'
+  }
 };
 class LeagueContainer extends Component {
     render() {
@@ -91,14 +91,15 @@ class LeagueContainer extends Component {
             );
         }
     }
+  }
 }
 
 const LeagueCard = withTracker(() => {
-    Meteor.subscribe('league', 'users');
-    return {
-        league: League.find().fetch(),
-        userLoggedin: Meteor.users.find().fetch()
-    };
+  Meteor.subscribe('league', 'users');
+  return {
+    league: League.find().fetch(),
+    userLoggedin: Meteor.users.find().fetch()
+  };
 })(LeagueContainer);
 
 export default LeagueCard;
