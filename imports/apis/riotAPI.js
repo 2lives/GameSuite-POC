@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 const League = new Mongo.Collection('league');
 
-const apiKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
+const apiKey = 'RGAPI-59d48401-e274-4342-9a8c-63307fc46258';
 
 HTTP.call(
   'GET',

@@ -38,7 +38,7 @@ const styles = {
 };
 class ProfileContainer extends Component {
   render() {
-    console.log(Meteor.users());
+    console.log(Meteor.user());
     return (
       <div>
         <Paper>
