@@ -65,41 +65,39 @@ class LeagueContainer extends Component {
 
             let leagueProfile = LoggedInUserId.profile.league;
 
-            return (
-                <div>
-                    <Card style={styles}>
-                        <div style={styles.cardWrapper}>
-                            <div style={styles.cardHeader}>
-                                <CardHeader
-                                    title="League of Legends"
-                                    subtitle="Riot Games"
-                                    avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
-                                    style={styles.cardHeader}
-                                />
-                                <span style={styles.username}>Username:</span>
-                                <CardTitle
-                                    title={leagueProfile.AccData.name}
-                                    style={styles.title}
-                                />
-                            </div>
-                            <CardText style={styles.cardText}>
-                                Most Played Champion:{'\n'}
-                                {ids.name}, {ids.title}
-                                {'\n'}
-                                Champion Info:{'\n'}
-                                Attack: {ids.info.attack} &nbsp; Defense:{' '}
-                                {ids.info.defense} &nbsp; Magic:{' '}
-                                {ids.info.magic} &nbsp; Difficulty:{' '}
-                                {ids.info.difficulty}
-                                {'\n'}
-                                Champion Mastery Level:{'\n'}
-                                {leagueProfile.data.championLevel}
-                            </CardText>
-                        </div>
-                    </Card>
-                </div>
-            );
-        }
+      return (
+        <div>
+          <Card style={styles}>
+            <div style={styles.cardWrapper}>
+              <div style={styles.cardHeader}>
+                <CardHeader
+                  title="League of Legends"
+                  subtitle="Riot Games"
+                  avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
+                  style={styles.cardHeader}
+                />
+                <span style={styles.username}>Username:</span>
+                <CardTitle
+                  title={leagueProfile.AccData.name}
+                  style={styles.title}
+                />
+              </div>
+              <CardText style={styles.cardText}>
+                Most Played Champion:{'\n'}
+                {ids.name}, {ids.title}
+                {'\n'}
+                Champion Info:{'\n'}
+                Attack: {ids.info.attack} &nbsp; Defense: {ids.info.defense}{' '}
+                &nbsp; Magic: {ids.info.magic} &nbsp; Difficulty:{' '}
+                {ids.info.difficulty}
+                {'\n'}
+                Champion Mastery Level:{'\n'}
+                {leagueProfile.data.championLevel}
+              </CardText>
+            </div>
+          </Card>
+        </div>
+      );
     }
 }
 

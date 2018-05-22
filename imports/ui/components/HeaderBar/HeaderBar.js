@@ -8,17 +8,17 @@ import AppBar from 'material-ui/AppBar';
 //TODO change the data to meteor users
 
 const styles = {
-    zIndex: '0'
+  zIndex: '0'
 };
 
 class HeaderBar extends Component {
-    render() {
-        return (
-            <AppBar title="GameSuite" showMenuIconButton={false} style={styles}>
-                <Route exact path="/" render={() => <SearchBar />} />
-            </AppBar>
-        );
-    }
+  render() {
+    return (
+      <AppBar title="GameSuite" showMenuIconButton={false} style={styles}>
+        {/* <Route exact path="/" render={() => <SearchBar />} /> */}
+      </AppBar>
+    );
+  }
 }
 
 export default HeaderBar;
