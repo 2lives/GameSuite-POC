@@ -35,61 +35,59 @@ const styles = {
   }
 };
 class LeagueContainer extends Component {
-    render() {
-        if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
-            return <p>loading</p>;
-        } else {
-            console.log(this.props);
-            let StaticChamps = JSON.parse(
-                this.props.league[0].LeagueChampionsStaticList.content
-            );
-            let MostPlayed = this.props.userLoggedin[0].profile.league.data
-                .championId;
-            let MostPlayedChampName = StaticChamps.data;
-            var ids = '';
-            for (var champId in MostPlayedChampName) {
-                if (MostPlayedChampName[champId].id == MostPlayed) {
-                    ids = MostPlayedChampName[champId];
-                }
-            }
-
-            let leagueProfile = this.props.userLoggedin[0].profile.league;
-
-            return (
-                <div>
-                    <Card style={styles}>
-                        <div style={styles.cardWrapper}>
-                            <div style={styles.cardHeader}>
-                                <CardHeader
-                                    title="League of Legends"
-                                    subtitle="Riot Games"
-                                    avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
-                                    style={styles.cardHeader}
-                                />
-                                <span style={styles.username}>Username:</span>
-                                <CardTitle
-                                    title={leagueProfile.AccData.name}
-                                    style={styles.title}
-                                />
-                            </div>
-                            <CardText style={styles.cardText}>
-                                Most Played Champion:{'\n'}
-                                {ids.name}, {ids.title}
-                                {'\n'}
-                                Champion Info:{'\n'}
-                                Attack: {ids.info.attack} &nbsp; Defense:{' '}
-                                {ids.info.defense} &nbsp; Magic:{' '}
-                                {ids.info.magic} &nbsp; Difficulty:{' '}
-                                {ids.info.difficulty}
-                                {'\n'}
-                                Champion Mastery Level:{'\n'}
-                                {leagueProfile.data.championLevel}
-                            </CardText>
-                        </div>
-                    </Card>
-                </div>
-            );
+  render() {
+    if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
+      return <p>loading</p>;
+    } else {
+      console.log(this.props);
+      let StaticChamps = JSON.parse(
+        this.props.league[0].LeagueChampionsStaticList.content
+      );
+      let MostPlayed = this.props.userLoggedin[0].profile.league.data
+        .championId;
+      let MostPlayedChampName = StaticChamps.data;
+      var ids = '';
+      for (var champId in MostPlayedChampName) {
+        if (MostPlayedChampName[champId].id == MostPlayed) {
+          ids = MostPlayedChampName[champId];
         }
+      }
+
+      let leagueProfile = this.props.userLoggedin[0].profile.league;
+
+      return (
+        <div>
+          <Card style={styles}>
+            <div style={styles.cardWrapper}>
+              <div style={styles.cardHeader}>
+                <CardHeader
+                  title="League of Legends"
+                  subtitle="Riot Games"
+                  avatar="https://ih0.redbubble.net/image.443976122.1598/flat,800x800,075,f.u1.jpg"
+                  style={styles.cardHeader}
+                />
+                <span style={styles.username}>Username:</span>
+                <CardTitle
+                  title={leagueProfile.AccData.name}
+                  style={styles.title}
+                />
+              </div>
+              <CardText style={styles.cardText}>
+                Most Played Champion:{'\n'}
+                {ids.name}, {ids.title}
+                {'\n'}
+                Champion Info:{'\n'}
+                Attack: {ids.info.attack} &nbsp; Defense: {ids.info.defense}{' '}
+                &nbsp; Magic: {ids.info.magic} &nbsp; Difficulty:{' '}
+                {ids.info.difficulty}
+                {'\n'}
+                Champion Mastery Level:{'\n'}
+                {leagueProfile.data.championLevel}
+              </CardText>
+            </div>
+          </Card>
+        </div>
+      );
     }
   }
 }
