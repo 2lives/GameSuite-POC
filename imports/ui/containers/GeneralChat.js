@@ -18,37 +18,31 @@ class GeneralChatContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            message: ''
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitMessage = this.handleSubmitMessage.bind(this);
+        this.handleChangeMessage = this.handleChangeMessage.bind(this);
     }
-    handleChange(event) {
-        this.setState({ value: event.target.value });
-        console.log(this.state.value);
+    handleChangeMessage(event) {
+        this.setState({ message: event.target.value });
     }
 
-    handleSubmit(event) {
-        alert('A message was submitted: ' + this.state.value);
-        event.preventDefault();
-        const message = this.state.value;
-        Meteor.call('Meteor.messages.postMessage', message);
+    handleSubmitMessage(e) {
+        e.preventDefault();
+        const submittedMessage = this.state.message;
+        Meteor.call('Meteor.message.PostMessage', submittedMessage);
     }
     render() {
         return (
             <div>
-                <Paper>
-                    <span style={styles}>GameSuite general chat</span>
-                    <form onSubmit={this.handleSubmit}>
-                        <TextField
-                            hintText="Compose Message"
-                            floatingLabelText="Chat with us!"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                        />
-                    </form>
-                </Paper>
+                <p>Chat goes here</p>
+                <form onSubmit={this.handleSubmitMessage}>
+                    <TextField
+                        onChange={this.handleChangeMessage}
+                        hintText="Compose Message"
+                        floatingLabelText="Chat with us!"
+                    />
+                </form>
             </div>
         );
     }
