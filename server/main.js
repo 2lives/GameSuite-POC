@@ -9,6 +9,7 @@ import SteamProfile from '../imports/apis/steamAPI';
 const LeagueAPIKey = 'RGAPI-8144e21f-0523-49d2-aa03-24e4cc44a524';
 const SteamAPIkey = '08A68F74EB79852D80BF6CE55B8DBD5A';
 
+const Messages = new Mongo.Collection('messages');
 /**
  * Adds steam user profile to existing logged in meteor account (if it exists)
  */
@@ -106,6 +107,7 @@ Meteor.methods({
               }
             },
             { upsert: true }
+<<<<<<< HEAD
           );
         }
       }
@@ -137,6 +139,80 @@ Meteor.methods({
       (error, result) => {
         if (!error) {
           Meteor.users.update(
+=======
+        );
+    },
+    /** _____________________________Messages___________________________ */
+    /**
+     * posting to messages collection
+     */
+    'Meteor.messages.postMessage'(message) {
+        console.log(message);
+        Messages.insert({ text: message });
+    },
+
+    /** ______________________________Steam___________________________ */
+    /**
+     * Gets steam profile summary from ID
+     */
+    'Meteor.users.GetSteamProfile'(result) {
+        const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
+            .steam.id;
+        console.log(steamId);
+        HTTP.call(
+            'GET',
+            `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${SteamAPIkey}&steamids=${steamId}`,
+            {},
+            (error, result) => {
+                if (!error) {
+                    Meteor.users.update(
+                        { _id: Meteor.userId() },
+                        {
+                            $set: {
+                                'profile.steam.steamProfile': JSON.parse(
+                                    result.content
+                                )
+                            }
+                        },
+                        { upsert: true }
+                    );
+                }
+            }
+        );
+    },
+    /**
+     *  Gets Steam Profile ID and grabs CSGO game data
+     */
+    'Meteor.users.GetCSGOStats'(result) {
+        const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
+            .steam.id;
+        console.log(steamId);
+        HTTP.call(
+            'GET',
+            `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${SteamAPIkey}&steamid=${steamId} `,
+            {},
+            (error, result) => {
+                if (!error) {
+                    Meteor.users.update(
+                        { _id: Meteor.userId() },
+                        {
+                            $set: {
+                                'profile.steam.csgo': JSON.parse(result.content)
+                            }
+                        },
+                        { upsert: true }
+                    );
+                }
+            }
+        );
+    },
+    /** ______________________________Fortnite BR___________________________ */
+    /**
+     *  Inserts Fortnite ID in to user object
+     */
+    'Meteor.users.InsertFortnite'(input) {
+        Meteor.users.update(
+>>>>>>> 7db07ab70b8b60f22844d93e2a5662c68da73e69
             { _id: Meteor.userId() },
             { $set: { 'profile.fortnite.data': result.content } },
             { upsert: true }
@@ -202,9 +278,18 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
+<<<<<<< HEAD
   Meteor.publish('users', function() {
     return Meteor.users.find();
   });
+=======
+    Meteor.publish('users', 'messages', function() {
+        return {
+            users: Meteor.users.find(),
+            messages: Messages.find()
+        };
+    });
+>>>>>>> 7db07ab70b8b60f22844d93e2a5662c68da73e69
 }
 
 /*************************** Meteor StartUp *********************************/

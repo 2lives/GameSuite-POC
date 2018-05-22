@@ -1,59 +1,69 @@
 import React, { Component } from 'react';
 import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
+    Card,
+    CardActions,
+    CardHeader,
+    CardMedia,
+    CardTitle,
+    CardText
 } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import League from '../../../apis/riotAPI';
+import { withRouter } from 'react-router';
 
 const styles = {
-  marginBottom: '25px',
-  width: '75vw',
-  cardWrapper: {
-    display: 'flex',
-    height: '200px'
-  },
-  cardHeader: {
-    fontWeight: '300',
-    width: '255px'
-  },
-  cardText: {
-    whiteSpace: 'pre-line',
-    lineHeight: '1.5'
-  },
-  title: {
-    fontWeight: '500'
-  },
-  username: {
-    marginLeft: '15px'
-  }
+    marginBottom: '25px',
+    width: '75vw',
+    cardWrapper: {
+        display: 'flex',
+        height: '200px'
+    },
+    cardHeader: {
+        fontWeight: '300',
+        width: '255px'
+    },
+    cardText: {
+        whiteSpace: 'pre-line',
+        lineHeight: '1.5'
+    },
+    title: {
+        fontWeight: '500'
+    },
+    username: {
+        marginLeft: '15px'
+    }
 };
-class LeagueContainer extends Component {
-  render() {
-    if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
-      return <p>loading</p>;
-    } else {
-      console.log(this.props);
-      let StaticChamps = JSON.parse(
-        this.props.league[0].LeagueChampionsStaticList.content
-      );
-      let MostPlayed = this.props.userLoggedin[0].profile.league.data
-        .championId;
-      let MostPlayedChampName = StaticChamps.data;
-      var ids = '';
-      for (var champId in MostPlayedChampName) {
-        if (MostPlayedChampName[champId].id == MostPlayed) {
-          ids = MostPlayedChampName[champId];
-        }
-      }
 
-      let leagueProfile = this.props.userLoggedin[0].profile.league;
+class LeagueContainer extends Component {
+    render() {
+        const LeagueUserProfile = this.props.routerProps.match.params;
+        if (!this.props.userLoggedin || !this.props.userLoggedin.length) {
+            return <p>loading</p>;
+        } else {
+            let loggedInUser = this.props.userLoggedin;
+            var LoggedInUserId = '';
+            for (var UserId in loggedInUser) {
+                if (loggedInUser[UserId]._id === LeagueUserProfile.id) {
+                    LoggedInUserId = loggedInUser[UserId];
+                }
+                console.log(this.props.userLoggedin);
+            }
+            let StaticChamps = JSON.parse(
+                this.props.league[0].LeagueChampionsStaticList.content
+            );
+            let MostPlayed = this.props.userLoggedin[0].profile.league.data
+                .championId;
+            let MostPlayedChampName = StaticChamps.data;
+            var ids = '';
+            for (var champId in MostPlayedChampName) {
+                if (MostPlayedChampName[champId].id == MostPlayed) {
+                    ids = MostPlayedChampName[champId];
+                }
+            }
+
+            let leagueProfile = LoggedInUserId.profile.league;
 
       return (
         <div>
@@ -89,15 +99,14 @@ class LeagueContainer extends Component {
         </div>
       );
     }
-  }
 }
 
 const LeagueCard = withTracker(() => {
-  Meteor.subscribe('league', 'users');
-  return {
-    league: League.find().fetch(),
-    userLoggedin: Meteor.users.find().fetch()
-  };
+    Meteor.subscribe('league', 'users');
+    return {
+        league: League.find().fetch(),
+        userLoggedin: Meteor.users.find().fetch()
+    };
 })(LeagueContainer);
 
 export default LeagueCard;

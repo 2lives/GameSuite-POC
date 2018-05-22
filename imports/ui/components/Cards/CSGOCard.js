@@ -46,8 +46,6 @@ class CSGOContainer extends Component {
 
             let CSGOStats = this.props.userLoggedin[0].profile.steam.csgo
                 .playerstats.stats;
-            console.log(CSGOStats);
-            console.log(CSGOStats[2].value);
             return (
                 <div>
                     <Card style={styles}>
