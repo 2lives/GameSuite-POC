@@ -7,7 +7,6 @@
     },
     "plugins": ["react", "jsx-a11y", "import"],
     "rules": {
-        "indent": ["error", 4],
         "max-len": 0,
         "global-require": 0,
         "arrow-parens": 0,
