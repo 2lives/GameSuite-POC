@@ -48,15 +48,13 @@ Meteor.methods({
       { upsert: true }
     );
   },
-  /** ______________________________Message___________________________ */
+  /** _____________________________Messages___________________________ */
   /**
-   * Posts message to server
+   * posting to messages collection
    */
-  'Meteor.message.PostMessage'(input) {
-    Meteor.message.insert(
-      { _id: Meteor.userId() },
-      { $set: { 'message.message': input } }
-    );
+  'Meteor.messages.postMessage'(message) {
+    console.log(message);
+    Messages.insert({ text: message });
   },
 
   /** ______________________________Steam___________________________ */
@@ -107,7 +105,6 @@ Meteor.methods({
               }
             },
             { upsert: true }
-<<<<<<< HEAD
           );
         }
       }
@@ -139,80 +136,6 @@ Meteor.methods({
       (error, result) => {
         if (!error) {
           Meteor.users.update(
-=======
-        );
-    },
-    /** _____________________________Messages___________________________ */
-    /**
-     * posting to messages collection
-     */
-    'Meteor.messages.postMessage'(message) {
-        console.log(message);
-        Messages.insert({ text: message });
-    },
-
-    /** ______________________________Steam___________________________ */
-    /**
-     * Gets steam profile summary from ID
-     */
-    'Meteor.users.GetSteamProfile'(result) {
-        const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
-            .steam.id;
-        console.log(steamId);
-        HTTP.call(
-            'GET',
-            `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${SteamAPIkey}&steamids=${steamId}`,
-            {},
-            (error, result) => {
-                if (!error) {
-                    Meteor.users.update(
-                        { _id: Meteor.userId() },
-                        {
-                            $set: {
-                                'profile.steam.steamProfile': JSON.parse(
-                                    result.content
-                                )
-                            }
-                        },
-                        { upsert: true }
-                    );
-                }
-            }
-        );
-    },
-    /**
-     *  Gets Steam Profile ID and grabs CSGO game data
-     */
-    'Meteor.users.GetCSGOStats'(result) {
-        const steamId = Meteor.users.findOne({ _id: Meteor.userId() }).profile
-            .steam.id;
-        console.log(steamId);
-        HTTP.call(
-            'GET',
-            `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${SteamAPIkey}&steamid=${steamId} `,
-            {},
-            (error, result) => {
-                if (!error) {
-                    Meteor.users.update(
-                        { _id: Meteor.userId() },
-                        {
-                            $set: {
-                                'profile.steam.csgo': JSON.parse(result.content)
-                            }
-                        },
-                        { upsert: true }
-                    );
-                }
-            }
-        );
-    },
-    /** ______________________________Fortnite BR___________________________ */
-    /**
-     *  Inserts Fortnite ID in to user object
-     */
-    'Meteor.users.InsertFortnite'(input) {
-        Meteor.users.update(
->>>>>>> 7db07ab70b8b60f22844d93e2a5662c68da73e69
             { _id: Meteor.userId() },
             { $set: { 'profile.fortnite.data': result.content } },
             { upsert: true }
@@ -278,18 +201,12 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-<<<<<<< HEAD
-  Meteor.publish('users', function() {
-    return Meteor.users.find();
+  Meteor.publish('users', 'messages', function() {
+    return {
+      users: Meteor.users.find(),
+      messages: Messages.find()
+    };
   });
-=======
-    Meteor.publish('users', 'messages', function() {
-        return {
-            users: Meteor.users.find(),
-            messages: Messages.find()
-        };
-    });
->>>>>>> 7db07ab70b8b60f22844d93e2a5662c68da73e69
 }
 
 /*************************** Meteor StartUp *********************************/
