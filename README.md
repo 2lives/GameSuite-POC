@@ -13,7 +13,7 @@
     <a href='https://reactjs.org/' alt='React Version'>
         <img src="https://img.shields.io/badge/React-v16.3.2-blue.svg?longCache=true&style=plastic"/>
     </a>
-        <a href='https://www.gnu.org/licenses/agpl-3.0' alt='GNU AGPLV3 License'>
+        <a href='https://www.gnu.org/licenses/agpl-3.0' alt='GNU AGPL V3 License'>
         <img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg"/>
     </a>
 
