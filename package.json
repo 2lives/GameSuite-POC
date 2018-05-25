@@ -1,6 +1,8 @@
 {
   "name": "GameSuite",
   "private": true,
+  "version": "0.8.0",
+  "description": "GameSuite is a centralized platform for competitive gamers where players can chat, organize and view in-game statistics from and about various different games.",
   "scripts": {
     "start": "meteor run"
   },
