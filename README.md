@@ -73,14 +73,23 @@ You will also need to have [Meteor](https://www.meteor.com/) installed
 
 ---
 
-Once you have it downloaded, inside the GameSuite folder,
-run
+* ### Step One
+  Inside the GameSuite folder,
+  run
 
 ```
 $ meteor
 ```
 
 to start up the project.
+
+* ### Step Two
+
+  Create an account at the top right and refresh the browser.
+
+* ### Step Three
+
+Create your GameSuiteID and Bio and add some games.
 
 <br/>
 
